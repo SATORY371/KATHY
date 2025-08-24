@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento de Mobile Legends</title>
+    <!-- Importamos la fuente Inter de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Importamos Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos personalizados para la estética de Mobile Legends */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #111827; /* Fondo oscuro */
+            color: #E5E7EB; /* Color de texto claro */
+        }
+        .container-bg {
+            background-image: url('media/1abec7ca7efa9ad40fd0bcbe287f13c4.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .countdown-item {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .button-glow {
+            box-shadow: 0 0 15px #FFD700;
+            transition: all 0.3s ease-in-out;
+        }
+        .button-glow:hover {
+            box-shadow: 0 0 25px #FFD700;
+            transform: scale(1.05);
+        }
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        .animate-pulse-custom {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center container-bg p-4">
+
+    <!-- Contenedor principal centrado -->
+    <main class="w-full max-w-2xl bg-gray-900/80 backdrop-blur-md p-8 rounded-xl shadow-2xl border-2 border-yellow-500/50 text-center">
+        
+        <!-- Título del evento -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-yellow-400 mb-6 uppercase tracking-wider leading-tight text-shadow-lg">
+            Evento Épico Desbloqueado
+        </h1>
+
+        <!-- Contenedor de la cuenta regresiva -->
+        <div id="countdown-container" class="mb-8 p-4 bg-gray-800/60 rounded-lg border border-yellow-500/40">
+            <div class="flex justify-center items-end text-center space-x-2 sm:space-x-4">
+                <!-- Días -->
+                <div class="flex-1">
+                    <span id="days" class="countdown-item text-4xl sm:text-5xl md:text-6xl font-bold text-yellow-300 drop-shadow-lg">00</span>
+                    <p class="text-sm sm:text-base text-gray-400">Días</p>
+                </div>
+                <p class="text-4xl sm:text-5xl text-yellow-300 font-bold -mt-2">:</p>
+                <!-- Horas -->
+                <div class="flex-1">
+                    <span id="hours" class="countdown-item text-4xl sm:text-5xl md:text-6xl font-bold text-yellow-300 drop-shadow-lg">00</span>
+                    <p class="text-sm sm:text-base text-gray-400">Horas</p>
+                </div>
+                <p class="text-4xl sm:text-5xl text-yellow-300 font-bold -mt-2">:</p>
+                <!-- Minutos -->
+                <div class="flex-1">
+                    <span id="minutes" class="countdown-item text-4xl sm:text-5xl md:text-6xl font-bold text-yellow-300 drop-shadow-lg">00</span>
+                    <p class="text-sm sm:text-base text-gray-400">Minutos</p>
+                </div>
+                <p class="text-4xl sm:text-5xl text-yellow-300 font-bold -mt-2">:</p>
+                <!-- Segundos -->
+                <div class="flex-1">
+                    <span id="seconds" class="countdown-item text-4xl sm:text-5xl md:text-6xl font-bold text-yellow-300 drop-shadow-lg">00</span>
+                    <p class="text-sm sm:text-base text-gray-400">Segundos</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón que se desbloquea al terminar la cuenta regresiva -->
+        <button id="unlock-button" class="hidden w-full py-4 px-6 rounded-lg font-bold text-lg sm:text-xl uppercase tracking-wider
+                                          text-gray-900 bg-gradient-to-r from-yellow-400 to-yellow-600 border border-yellow-300
+                                          button-glow animate-pulse-custom">
+            Reclamar Recompensa
+        </button>
+
+    </main>
+
+    <script>
+        // Obtenemos los elementos HTML que vamos a actualizar
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const countdownContainer = document.getElementById('countdown-container');
+        const unlockButton = document.getElementById('unlock-button');
+
+        // Establecemos la fecha final de la cuenta regresiva (ejemplo: 5 minutos desde ahora)
+        const countdownDate = new Date().getTime() + (5 * 60 * 1000);
+
+        // Actualizamos la cuenta regresiva cada 1 segundo
+        const countdownInterval = setInterval(() => {
+            // Obtenemos la fecha y hora actuales
+            const now = new Date().getTime();
+
+            // Calculamos la distancia entre ahora y la fecha de la cuenta regresiva
+            const distance = countdownDate - now;
+
+            // Si la cuenta regresiva ha terminado
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                // Ocultamos el contenedor de la cuenta regresiva
+                countdownContainer.classList.add('hidden');
+                // Mostramos el botón
+                unlockButton.classList.remove('hidden');
+            } else {
+                // Si aún queda tiempo, calculamos los días, horas, minutos y segundos
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Actualizamos el contenido de los elementos HTML
+                daysEl.innerHTML = String(days).padStart(2, '0');
+                hoursEl.innerHTML = String(hours).padStart(2, '0');
+                minutesEl.innerHTML = String(minutes).padStart(2, '0');
+                secondsEl.innerHTML = String(seconds).padStart(2, '0');
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
