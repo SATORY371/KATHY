@@ -1,3 +1,5 @@
+// index.js
+
 // Utility Functions
 const Utils = {
     rand: (min, max) => Math.random() * (max - min) + min,
@@ -34,7 +36,7 @@ class BirthdayExperience {
         await this.audio.load();
         this.state = 'ready';
         this.ui.showScreen('initial');
-        this.ui.bindVolumeControl(this.audio.setVolume.bind(this.audio)); // Bind volume control after audio loads
+        this.ui.bindVolumeControl(this.audio.setVolume.bind(this.audio));
     }
 
     resize() {
@@ -43,13 +45,12 @@ class BirthdayExperience {
         this.starfield.resize();
     }
 
-    // Corregido: Ahora pasa la estructura de la canción a this.audio.play()
     start(lang) {
         if (this.state !== 'ready') return;
         this.state = 'playing';
         this.lyrics.setLanguage(lang);
         this.ui.showScreen('lyrics');
-        // Pasa la estructura de la canción como argumento
+        // Pasa la estructura de la canción al AudioManager
         this.audio.play(this.lyrics.songStructure, (time, segment) => this.onAudioEvent(time, segment));
     }
     
@@ -94,7 +95,7 @@ class UIManager {
             replay: document.getElementById('replay-screen'),
             lyrics: document.getElementById('lyrics-container'),
         };
-        this.volumeSlider = document.getElementById('volume-slider'); // Get the volume slider element
+        this.volumeSlider = document.getElementById('volume-slider');
     }
 
     showScreen(screenName) {
@@ -113,7 +114,7 @@ class UIManager {
         document.getElementById('replay-button').addEventListener('click', callback);
     }
 
-    bindVolumeControl(setVolumeCallback) { // New method to bind volume control
+    bindVolumeControl(setVolumeCallback) {
         if (this.volumeSlider) {
             this.volumeSlider.addEventListener('input', (event) => {
                 const volume = parseFloat(event.target.value);
@@ -129,7 +130,7 @@ class LyricManager {
         this.container = document.getElementById('lyrics-container');
         this.songStructure = [
             { time: 0, type: 'instrumental', line: '' },
-            { time: 20, type: 'chorus', line: "'Cause you're a sky, 'cause you're a sky full of stars" }, // Adjusted time to 20 seconds
+            { time: 20, type: 'chorus', line: "'Cause you're a sky, 'cause you're a sky full of stars" },
             { time: 28, type: 'verse', line: "I'm gonna give you my heart" },
             { time: 35, type: 'chorus', line: "'Cause you're a sky, 'cause you're a sky full of stars" },
             { time: 42, type: 'verse', line: "'Cause you light up the path" },
@@ -149,7 +150,7 @@ class LyricManager {
             { time: 164, type: 'instrumental', line: '' },
             { time: 165, type: 'outro', line: "You're such a heavenly view" },
             { time: 175, type: 'outro', line: "You're such a heavenly view" },
-            { time: 185, type: 'outro', line: "¡Feliz Cumpleaños  KATHY!" }
+            { time: 185, type: 'outro', line: "¡Feliz Cumpleaños KATHY!" }
         ];
         this.lyricsEs = {
             "'Cause you're a sky, 'cause you're a sky full of stars": "Porque eres un cielo, un cielo lleno de estrellas",
@@ -184,7 +185,6 @@ class LyricManager {
         if (lineText) {
             this.container.innerHTML = `<p class="lyric-line">${lineText}</p>`;
             const lyricElement = this.container.querySelector('.lyric-line');
-            // Force reflow to restart animation
             void lyricElement.offsetWidth;
             lyricElement.classList.add('visible');
         } else {
@@ -196,71 +196,57 @@ class LyricManager {
 // Audio Manager Class
 class AudioManager {
     constructor() {
-        this.player = null; // Will hold our Tone.Player instance
-        this.volumeNode = null; // New Tone.Volume node
+        this.player = null;
+        this.volumeNode = null;
         this.songPart = null;
-        this.totalDuration = 190; // Approx song length, adjust if your MP3 is different
-        this.isReady = false; // Flag to indicate if the audio is loaded
+        this.totalDuration = 190;
+        this.isReady = false;
     }
 
     async load() {
-        // Create a Tone.Player instance for your MP3 file
-        // Make sure the path to your MP3 is correct!
-        this.player = new Tone.Player("media/Coldplay - A Sky Full Of Stars (Official Video).mp3", () => { //
+        this.player = new Tone.Player("media/Coldplay - A Sky Full Of Stars (Official Video).mp3", () => {
             console.log("MP3 Loaded!");
             this.isReady = true;
-            this.totalDuration = this.player.buffer.duration; // Get actual duration from MP3
+            this.totalDuration = this.player.buffer.duration;
         });
 
-        // Create a Tone.Volume node
-        this.volumeNode = new Tone.Volume(-20).toDestination(); // -20 dB is roughly 10% volume
+        this.volumeNode = new Tone.Volume(-20).toDestination();
 
-        // Connect the player to the volume node, and the volume node to the destination
         this.player.connect(this.volumeNode);
-
-        // This is crucial for audio to start in browsers due to autoplay policies
+        
         await Tone.start();
     }
 
-    // Corregido: Ahora el método "play" recibe "songStructure" como parámetro
     play(songStructure, onEventCallback) {
         if (!this.isReady) {
             console.warn("Audio not yet loaded. Please wait.");
             return;
         }
         
-        // Start the MP3 playback
         this.player.start(0); 
 
-        // Crea el Tone.Part usando el parámetro "songStructure"
         this.songPart = new Tone.Part((time, segment) => {
             onEventCallback(time, segment);
         }, songStructure).start(0);
 
-        Tone.Transport.start(); // Start Tone.js's internal transport
+        Tone.Transport.start();
     }
 
-    setVolume(normalizedVolume) { // Method to set volume based on slider value
-        // Convert normalized volume (0-1) to decibels
-        // A common mapping: 0.01 -> -40dB, 1 -> 0dB. 0.1 -> -20dB
+    setVolume(normalizedVolume) {
         if (this.volumeNode) {
-            this.volumeNode.volume.value = 20 * Math.log10(normalizedVolume); //
+            this.volumeNode.volume.value = 20 * Math.log10(normalizedVolume);
         }
     }
     
     isPlaying() {
-        // Check if the player is currently playing
-        return this.player && this.player.state === 'started'; //
+        return this.player && this.player.state === 'started';
     }
     
     isFinished() {
-        // Check if the player has finished playing (if not looping)
-        // This is a simple check; for precise end-of-song detection, 
-        // you might use this.player.onended = () => { /* handle end */ };
         return this.player && Tone.Transport.seconds >= this.totalDuration;
     }
 
-    reset() { // New reset method for audio playback
+    reset() {
         if (this.player) {
             this.player.stop();
             this.player.seek(0);
@@ -334,9 +320,9 @@ class EffectsManager {
             document.body.style.backgroundColor = 'var(--dark-purple)';
             this.effectsInterval = setInterval(() => this.createFirework(), 800);
         }
-         if (type !== 'instrumental') {
-             document.body.style.backgroundColor = 'var(--deep-space)';
-         }
+        if (type !== 'instrumental') {
+            document.body.style.backgroundColor = 'var(--deep-space)';
+        }
     }
 
     createHeart() {
