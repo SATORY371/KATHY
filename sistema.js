@@ -1,4 +1,4 @@
-// index.js
+// flori.js
 
 // Utility Functions
 const Utils = {
@@ -17,7 +17,7 @@ class BirthdayExperience {
         this.starfield = new Starfield(this.canvas, this.ctx);
         this.effects = new EffectsManager(this.canvas, this.ctx);
         this.lyrics = new LyricManager();
-        this.state = 'loading'; // loading, ready, playing, finished
+        this.state = 'loading';
         this.animationFrameId = null;
 
         this.setup();
@@ -50,7 +50,6 @@ class BirthdayExperience {
         this.state = 'playing';
         this.lyrics.setLanguage(lang);
         this.ui.showScreen('lyrics');
-        // Pasa la estructura de la canción al AudioManager
         this.audio.play(this.lyrics.songStructure, (time, segment) => this.onAudioEvent(time, segment));
     }
     
@@ -59,7 +58,7 @@ class BirthdayExperience {
         this.lyrics.reset();
         this.effects.clear();
         this.ui.showScreen('initial');
-        this.audio.reset(); // Reset audio for replay
+        this.audio.reset();
     }
 
     onAudioEvent(time, segment) {
@@ -75,7 +74,6 @@ class BirthdayExperience {
         this.effects.update();
         
         if (this.audio.isPlaying() && !this.audio.isFinished()) {
-            // Check if song has ended
         } else if (this.state === 'playing' && this.audio.isFinished()) {
             this.state = 'finished';
             this.effects.clear();
@@ -415,7 +413,7 @@ class Firework {
         this.angle = Math.atan2(endY - startY, endX - startX);
         this.hue = Utils.rand(0, 360);
         this.particles = [];
-        this.state = 'flying'; // flying, exploded
+        this.state = 'flying';
         this.isDone = false;
     }
 
