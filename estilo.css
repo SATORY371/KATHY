@@ -1,0 +1,403 @@
+ /* --- Base Reset and Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif; /* Fuente principal para el cuerpo */
+            color: #333;
+            overflow: hidden; /* Oculta el scroll por defecto del body para que el contenedor lo maneje */
+            height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+            background-color: #f8f8f8; /* Un color de fondo suave por si alguna imagen no carga */
+        }
+
+        /* --- Contenedor principal con Scroll Horizontal (Reemplaza .slider y .items-group) --- */
+        .horizontal-scroll-container {
+            display: flex; /* Permite que los hijos se coloquen uno al lado del otro */
+            width: 100%;
+            height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+            overflow-x: scroll; /* Habilita el scroll horizontal */
+            overflow-y: hidden; /* Oculta el scroll vertical */
+            scroll-snap-type: x mandatory; /* Fuerza que el scroll se "rompa" en cada item */
+            -webkit-overflow-scrolling: touch; /* Mejora el rendimiento del scroll en iOS */
+            scroll-behavior: smooth; /* Hace que el scroll sea más suave */
+            position: relative; /* Para posicionar los dots */
+        }
+
+        /* Cada "slide" o sección individual (.item) */
+        .horizontal-scroll-container .item {
+            flex: 0 0 100vw; /* Cada item ocupa exactamente el 100% del ancho de la ventana */
+            width: 100vw; /* Asegura que cada item tenga el ancho completo */
+            height: 100vh; /* Asegura que cada item tenga el alto completo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Mantiene la imagen de fondo fija al desplazarse */
+            scroll-snap-align: start; /* Ajusta el inicio de cada item al inicio del contenedor de scroll */
+            padding: 60px 20px;
+            box-sizing: border-box;
+            position: relative; /* Necesario para los sparkles y otros elementos absolutos */
+            color: #fff; /* Color de texto por defecto para los slides con fondo oscuro */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Contenedor de contenido dentro de cada slide */
+        .slide-content {
+            max-width: 900px;
+            width: 95%;
+            background: rgba(255, 255, 255, 0.9); /* Fondo ligeramente más opaco */
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(15px); /* Efecto blur más pronunciado */
+            text-align: center;
+            animation: fadeIn 1s ease-out; /* Mantenemos la animación al cargar */
+            color: #333; /* Color de texto para el contenido de la tarjeta */
+            position: relative; /* Para z-index si hay elementos superpuestos */
+            z-index: 2;
+        }
+        
+        /* Estilos específicos para slides que solo contienen una tarjeta de enlace */
+        .item.single-card-slide .slide-content {
+            background: transparent;
+            backdrop-filter: none;
+            box-shadow: none;
+            color: inherit; /* Hereda el color del item para que las tarjetas de enlace manejen su propio color */
+        }
+
+        /* Animación de entrada para el contenido del slide */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* --- Estilos de los elementos de contenido (adaptados y expandidos) --- */
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-family: 'Georgia', serif;
+            font-size: 3.2em; /* Título más grande */
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700; /* Más audaz */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-family: 'Dancing Script', cursive; /* Fuente más elegante para subtítulos */
+            font-size: 1.8em; /* Subtítulo más grande */
+            color: #444;
+            margin-bottom: 30px;
+            font-style: normal; /* No cursiva por defecto para Dancing Script */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .heart {
+            font-size: 3em; /* Corazón más grande */
+            color: #e74c3c; /* Rojo vibrante */
+            animation: heartbeat 1.5s infinite ease-in-out; /* Animación de latido más suave */
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.7); /* Sombra más pronunciada */
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); } /* Latido un poco más grande */
+        }
+
+        /* --- Estilos para las tarjetas de enlace --- */
+        .link-card {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24); /* Degradado rojo-naranja */
+            border-radius: 20px; /* Bordes más redondeados */
+            padding: 40px 35px; /* Más padding */
+            transition: all 0.5s ease; /* Transición más suave */
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Sombra más profunda */
+            position: relative;
+            overflow: hidden;
+            display: inline-block; /* Se ajusta al contenido */
+            max-width: 450px; /* Ancho máximo aumentado */
+            width: 100%;
+            margin: 20px 0; /* Margen para separarlas si hay varias */
+            transform-style: preserve-3d; /* Para efectos 3D si se añaden */
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); /* Brillo más fuerte */
+            transition: left 0.7s ease-out; /* Transición más lenta y suave */
+            z-index: 1;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card:hover {
+            transform: translateY(-10px) scale(1.06); /* Elevación y escala ligeramente mayores */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35); /* Sombra más dramática */
+        }
+
+        /* Variaciones de color para las tarjetas */
+        .link-card.color-2 { background: linear-gradient(135deg, #74b9ff, #0984e3); } /* Azul */
+        .link-card.color-3 { background: linear-gradient(135deg, #fd79a8, #e84393); } /* Rosa */
+        .link-card.color-4 { background: linear-gradient(135deg, #00b894, #00a085); } /* Verde */
+        .link-card.color-5 { background: linear-gradient(135deg, #fdcb6e, #f39c12); } /* Amarillo/Naranja */
+        .link-card.color-6 { background: linear-gradient(135deg, #a29bfe, #6c5ce7); } /* Morado */
+        .link-card.color-7 { background: linear-gradient(135deg, #ff9ff3, #f06292); } /* Rosa claro */
+        .link-card.color-8 { background: linear-gradient(135deg, #ffeaa7, #fab1a0); } /* Pastel */
+
+        .link-icon {
+            font-size: 3.5em; /* Icono más grande */
+            margin-bottom: 25px;
+            display: block;
+            text-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .link-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em; /* Título de tarjeta más grande */
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .link-description {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2em; /* Descripción de tarjeta más grande */
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* --- Estilos para el Footer --- */
+        .footer {
+            margin-top: 50px;
+            padding-top: 40px;
+            color: #eee; /* Color más claro para texto en fondo oscuro */
+            font-style: italic;
+            font-size: 1.3em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* --- Navegación de Puntos (Dots) para indicar la posición --- */
+        .navigations {
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            position: fixed; /* Fijo en la pantalla */
+            z-index: 100; /* Por encima de todo */
+            text-align: center;
+        }
+        .navigations .dots {
+            padding: 10px 0px;
+            margin: 0;
+            display: inline-flex; /* Para que los puntos estén en línea */
+            background: rgba(0, 0, 0, 0.3); /* Fondo semitransparente para los puntos */
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .navigations .dots li {
+            width: 14px; /* Puntos ligeramente más grandes */
+            height: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid transparent;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            list-style-type: none;
+            margin: 0 8px; /* Espacio entre puntos */
+        }
+        .navigations .dots li:hover {
+            background: #ffffff;
+            transform: scale(1.3); /* Efecto hover más pronunciado */
+        }
+        .navigations .dots li.active {
+            width: 18px; /* Punto activo más grande */
+            height: 18px;
+            background: #ffffff;
+            border-color: #ff6b6b; /* Borde rojo para el activo */
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.7); /* Sombra brillante para el activo */
+        }
+
+        /* --- Efecto de Destellos (Sparkles) --- */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            animation: sparkle 3s infinite ease-out; /* Animación más suave */
+            z-index: 999;
+            opacity: 0; /* Asegura que no sean visibles al inicio */
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            20% { opacity: 1; transform: scale(1.2) rotate(45deg); }
+            80% { opacity: 1; transform: scale(1) rotate(90deg); }
+            100% { opacity: 0; transform: scale(0.5) rotate(135deg); }
+        }
+
+        /* --- Estilos para la sección de Galería de Imágenes --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas */
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px; /* Altura fija para las imágenes */
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        .gallery-item-caption {
+            padding: 15px;
+            color: #333;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        /* --- Estilos para la sección de Mensaje Personal --- */
+        .personal-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            line-height: 1.5;
+            color: #fff; /* Color claro para el texto en fondo oscuro */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4); /* Fondo semitransparente para el mensaje */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: textFadeIn 2s ease-out;
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Estilos para la sección de Cuenta Regresiva (Ejemplo básico) --- */
+        #countdown {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4em;
+            color: #ff6b6b;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        #countdown div {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            text-align: center;
+            min-width: 120px;
+        }
+
+        #countdown span {
+            display: block;
+            font-size: 0.4em;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        /* --- Media Queries para Responsividad --- */
+        @media (max-width: 1024px) {
+            .title { font-size: 2.8em; }
+            .subtitle { font-size: 1.6em; }
+            .link-card { padding: 30px 25px; max-width: 400px; }
+            .link-title { font-size: 1.7em; }
+            .link-description { font-size: 1.1em; }
+            .personal-message { font-size: 2em; padding: 25px; }
+            #countdown { font-size: 3em; gap: 20px; }
+            #countdown div { padding: 15px 20px; min-width: 100px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            .item { padding: 40px 15px; }
+            .slide-content { padding: 25px; }
+            .title { font-size: 2.2em; }
+            .subtitle { font-size: 1.4em; }
+            .heart { font-size: 2.5em; }
+            .link-card { padding: 25px 20px; max-width: 320px; }
+            .link-title { font-size: 1.5em; }
+            .link-description { font-size: 1em; }
+            .personal-message { font-size: 1.6em; padding: 20px; }
+            #countdown { font-size: 2.2em; gap: 15px; }
+            #countdown div { padding: 10px 15px; min-width: 80px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .gallery-item img { height: 150px; }
+            .gallery-item-caption { font-size: 0.9em; }
+        }
+
+        @media (max-width: 480px) {
+            .item { padding: 30px 10px; }
+            .slide-content { padding: 20px; }
+            .title { font-size: 1.8em; }
+            .subtitle { font-size: 1.2em; }
+            .heart { font-size: 2em; }
+            .link-card { padding: 20px 15px; }
+            .link-title { font-size: 1.3em; }
+            .link-description { font-size: 0.9em; }
+            .personal-message { font-size: 1.3em; padding: 15px; }
+            #countdown { font-size: 1.8em; gap: 10px; }
+            #countdown div { padding: 8px 10px; min-width: 60px; }
+            #countdown span { font-size: 0.3em; }
+            .gallery-grid { grid-template-columns: 1fr; } /* Una columna en pantallas muy pequeñas */
+            .gallery-item img { height: 250px; }
+        }

@@ -1,0 +1,209 @@
+:root {
+    --num-floors: 10; /* Número de pisos del edificio */
+    --floor-height: 80px; /* Altura de cada piso */
+    --elevator-travel-time-per-floor: 1s; /* Tiempo que tarda el ascensor en moverse un piso */
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Aplica la fuente Inter */
+    overflow: hidden; /* Evita barras de desplazamiento innecesarias */
+}
+
+.building {
+    width: 150px;
+    height: calc(var(--num-floors) * var(--floor-height)); /* Altura total del edificio */
+    position: relative;
+    background-color: #e2e8f0; /* Color base del edificio */
+    border: 3px solid #64748b; /* Borde del edificio */
+    border-radius: 8px;
+    /* Un pequeño patrón de rejilla para simular ventanas/estructura */
+    background-image: linear-gradient(to right, #cbd5e1 1px, transparent 1px),
+                      linear-gradient(to bottom, #cbd5e1 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.floor {
+    height: var(--floor-height);
+    border-bottom: 2px solid #9ca3af; /* Línea que separa los pisos */
+    box-sizing: border-box; /* Asegura que el padding/border no aumenten el tamaño */
+    position: relative; /* Para posicionar los botones de llamada */
+}
+
+.floor:last-child {
+    border-bottom: none; /* El último piso no tiene borde inferior */
+}
+
+.elevator-car {
+    position: absolute;
+    bottom: 0; /* Empieza en el piso 0 */
+    left: 0;
+    width: 100%;
+    height: var(--floor-height);
+    background-color: #4b5563; /* Color del ascensor */
+    border: 3px solid #1f2937; /* Borde del ascensor */
+    border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
+    transition: bottom var(--elevator-travel-time-per-floor) linear; /* Transición suave al moverse */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 10; /* Asegura que el ascensor esté sobre los pisos */
+    overflow: hidden;
+}
+
+.elevator-display {
+    position: absolute;
+    top: 5px;
+    background-color: #000;
+    color: #0f0; /* Color de texto verde brillante */
+    font-family: 'Press Start 2P', cursive; /* Fuente pixelada para el display */
+    font-size: 0.9em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    z-index: 1;
+}
+
+.elevator-doors {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden; /* Oculta las partes de las puertas cuando se abren */
+    border-radius: 6px 6px 0 0; /* Bordes redondeados para las puertas */
+}
+
+.door {
+    width: 50%;
+    height: 100%;
+    background-color: #6b7280; /* Color de las puertas */
+    border: 2px solid #374151; /* Borde de las puertas */
+    transition: transform 0.5s ease-in-out; /* Transición suave para abrir/cerrar */
+    box-sizing: border-box;
+}
+
+.door-left {
+    border-radius: 6px 0 0 0; /* Esquina superior izquierda redondeada */
+    transform-origin: right; /* Punto de pivote para la transformación */
+}
+
+.door-right {
+    border-radius: 0 6px 0 0; /* Esquina superior derecha redondeada */
+    transform-origin: left; /* Punto de pivote para la transformación */
+}
+
+.doors-open .door-left {
+    transform: translateX(-100%); /* Mueve la puerta izquierda hacia afuera */
+}
+
+.doors-open .door-right {
+    transform: translateX(100%); /* Mueve la puerta derecha hacia afuera */
+}
+
+/* Estilos para las etiquetas de piso y paneles de llamada */
+.floor-label {
+    position: absolute;
+    left: -40px; /* Posiciona a la izquierda del edificio */
+    width: 30px;
+    text-align: right;
+    font-weight: bold;
+    color: #4b5563;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.call-panel {
+    position: absolute;
+    right: -130px; /* Posiciona a la derecha del edificio */
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.call-button {
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #9ca3af;
+    background-color: #e5e7eb;
+    color: #374151;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.call-button:hover {
+    background-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.call-button:active {
+    transform: translateY(0);
+}
+
+.call-button.active {
+    background-color: #22c55e; /* Verde para botón activo */
+    color: white;
+    border-color: #16a34a;
+}
+
+/* Estilos para el modal de destino */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px; /* Ancho máximo del modal */
+    width: 90%;
+}
+
+.modal-content .floor-button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background-color: #f1f5f9;
+    color: #374151;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.modal-content .floor-button:hover {
+    background-color: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+.modal-content .floor-button:active {
+    transform: translateY(0);
+}
+
+.modal-content .floor-button.active {
+    background-color: #2563eb; /* Azul para el piso actual o seleccionado */
+    color: white;
+    border-color: #1d4ed8;
+}
+
+.hidden {
+    display: none;
+}

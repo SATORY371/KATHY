@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Cielo Lleno de Estrellas para Ti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="flori.css">
+    
+</head>
+<body>
+    <canvas id="main-canvas"></canvas>
+    <div id="effects-field"></div>
+    <div id="ui-container">
+        <div id="loading-screen" class="ui-screen">
+            <p>Cargando la experiencia...</p>
+        </div>
+        <div id="initial-screen" class="ui-screen hidden">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4" style="font-family: 'Dancing Script', cursive; text-shadow: 0 0 10px #fff;">¡Feliz Cumpleaños!</h1>
+            <p class="text-lg md:text-2xl mb-8">Para esa persona que brilla más que cualquier estrella.</p>
+            <div>
+                <button id="start-es" class="lang-button">Ver en Español</button>
+                <button id="start-en" class="lang-button">Ver en English</button>
+            </div>
+        </div>
+         <div id="replay-screen" class="ui-screen hidden">
+            <h2 class="text-2xl md:text-4xl mb-6">¿Otra vez?</h2>
+            <button id="replay-button" class="lang-button">Repetir la magia</button>
+        </div>
+    </div>
+    <div id="lyrics-container"></div>
+
+    <div id="volume-control-container">
+        <span class="volume-icon">🔊</span>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1">
+    </div>
+
+    <script src="sistema.js"></script>
+</body>
+</html>
