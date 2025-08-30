@@ -1,125 +1,130 @@
- // --- Efecto de Destellos (Sparkles) ---
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = Math.random() * 100 + 'vw';
-            sparkle.style.top = Math.random() * 100 + 'vh';
-            sparkle.innerHTML = '✨'; // O cualquier otro emoji o carácter
-            sparkle.style.fontSize = Math.random() * 20 + 10 + 'px'; // Tamaño aleatorio
-            
-            document.body.appendChild(sparkle);
-            
-            // Eliminar el destello después de su animación
-            setTimeout(() => {
-                sparkle.remove();
-            }, 3000); // Coincide con la duración de la animación
-        }
-        // Crear un nuevo destello cada 1.5 segundos
-        setInterval(createSparkle, 1500);
+// --- Efecto de Destellos (Sparkles) ---
+function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = Math.random() * 100 + 'vw';
+    sparkle.style.top = Math.random() * 100 + 'vh';
+    sparkle.innerHTML = '✨';
+    sparkle.style.fontSize = Math.random() * 20 + 10 + 'px';
+    
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => {
+        sparkle.remove();
+    }, 3000);
+}
+// Solo crear destellos si la pantalla no está bloqueada
+let sparkleInterval;
 
-        // --- Lógica para los Puntos de Navegación (Dots) y Scroll Snap ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const scrollContainer = document.querySelector('.horizontal-scroll-container');
-            const sliderItems = document.querySelectorAll('.horizontal-scroll-container .item');
-            const dotsContainer = document.querySelector('.navigations .dots');
-            
-            if (!scrollContainer || !sliderItems.length || !dotsContainer) return;
 
-            // 1. Crear los puntos de navegación
-            sliderItems.forEach((_, index) => {
-                const dot = document.createElement('li');
-                dot.setAttribute('data-index', index); // Guardar el índice en el data-attribute
-                dot.addEventListener('click', () => {
-                    // Al hacer clic, desplázate suavemente al item correspondiente
-                    scrollContainer.scrollTo({
-                        left: sliderItems[index].offsetLeft,
-                        behavior: 'smooth'
-                    });
-                });
-                dotsContainer.appendChild(dot);
-            });
+// --- Lógica para los Puntos de Navegación (Dots) y Scroll Snap ---
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollContainer = document.querySelector('.horizontal-scroll-container');
+    const sliderItems = document.querySelectorAll('.horizontal-scroll-container .item');
+    const dotsContainer = document.querySelector('.navigations .dots');
+    
+    if (!scrollContainer || !sliderItems.length || !dotsContainer) return;
 
-            const dots = dotsContainer.querySelectorAll('li');
-
-            // Función para actualizar el punto activo
-            function updateActiveDot() {
-                const scrollLeft = scrollContainer.scrollLeft;
-                const containerWidth = scrollContainer.offsetWidth;
-
-                // Calcula qué item está más visible
-                let activeIndex = 0;
-                for (let i = 0; i < sliderItems.length; i++) {
-                    const item = sliderItems[i];
-                    // Si el centro del item está dentro de la vista actual
-                    if (item.offsetLeft <= scrollLeft + containerWidth / 2 &&
-                        item.offsetLeft + item.offsetWidth > scrollLeft + containerWidth / 2) {
-                        activeIndex = i;
-                        break;
-                    }
-                }
-
-                dots.forEach((dot, index) => {
-                    if (index === activeIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-            }
-
-            // Escuchar el evento de scroll para actualizar los puntos
-            scrollContainer.addEventListener('scroll', updateActiveDot);
-
-            // Inicializar el punto activo al cargar la página
-            updateActiveDot();
-
-            // --- Navegación con Teclado (Flechas Izquierda/Derecha) ---
-            document.addEventListener('keydown', (e) => {
-                if (!scrollContainer) return;
-
-                const scrollAmount = window.innerWidth; // Desplázate por el ancho de la ventana
-
-                if (e.key === 'ArrowRight') {
-                    scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                    e.preventDefault(); // Evita el scroll por defecto del navegador
-                } else if (e.key === 'ArrowLeft') {
-                    scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                    e.preventDefault(); // Evita el scroll por defecto del navegador
-                }
+    sliderItems.forEach((_, index) => {
+        const dot = document.createElement('li');
+        dot.setAttribute('data-index', index);
+        dot.addEventListener('click', () => {
+            scrollContainer.scrollTo({
+                left: sliderItems[index].offsetLeft,
+                behavior: 'smooth'
             });
         });
+        dotsContainer.appendChild(dot);
+    });
 
-        // --- Lógica para la Cuenta Regresiva (Ejemplo) ---
-        // Establece la fecha objetivo (30 de agosto del año actual)
-        const targetDate = new Date();
-        targetDate.setMonth(7); // Agosto es el mes 7 (0-indexado)
-        targetDate.setDate(30);
-        targetDate.setHours(0, 0, 0, 0); // Medianoche del 30 de agosto
+    const dots = dotsContainer.querySelectorAll('li');
 
-        // Si la fecha ya pasó este año, establece la fecha para el próximo año
-        if (targetDate < new Date()) {
-            targetDate.setFullYear(targetDate.getFullYear() + 1);
-        }
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = String(days).padStart(2, '0');
-            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "<div style='font-size: 0.5em;'>¡Es el día! 🎉</div>";
+    function updateActiveDot() {
+        const scrollLeft = scrollContainer.scrollLeft;
+        const containerWidth = scrollContainer.offsetWidth;
+        let activeIndex = 0;
+        for (let i = 0; i < sliderItems.length; i++) {
+            const item = sliderItems[i];
+            if (item.offsetLeft <= scrollLeft + containerWidth / 2 &&
+                item.offsetLeft + item.offsetWidth > scrollLeft + containerWidth / 2) {
+                activeIndex = i;
+                break;
             }
         }
+        dots.forEach((dot, index) => {
+            if (index === activeIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
 
-        let countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Llama una vez inmediatamente para evitar el parpadeo inicial
+    scrollContainer.addEventListener('scroll', updateActiveDot);
+    updateActiveDot();
+
+    document.addEventListener('keydown', (e) => {
+        if (!scrollContainer) return;
+        const scrollAmount = window.innerWidth;
+        if (e.key === 'ArrowRight') {
+            scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            e.preventDefault();
+        } else if (e.key === 'ArrowLeft') {
+            scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            e.preventDefault();
+        }
+    });
+});
+
+
+// --- Lógica para la Cuenta Regresiva y PANTALLA DE BLOQUEO ---
+const lockScreen = document.getElementById('lock-screen');
+
+// =======================================================================
+// ==== CAMBIA ESTA FECHA PARA ESTABLECER CUÁNDO SE DESBLOQUEA ====
+// =======================================================================
+// Formato: "Mes Dia, Año HH:MM:SS" -> "Aug 30, 2025 00:00:00"
+const targetDate = new Date("Aug 30, 2025 00:00:00").getTime();
+
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    // Si el tiempo ha terminado
+    if (distance < 0) {
+        clearInterval(countdownInterval);
+        
+        // Oculta la pantalla de bloqueo
+        if(lockScreen) {
+            lockScreen.classList.add('unlocked');
+        }
+
+        // Activa los destellos una vez desbloqueado
+        if (!sparkleInterval) {
+            sparkleInterval = setInterval(createSparkle, 1500);
+        }
+        
+        // Opcional: Actualiza el contador a cero por si acaso.
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return; 
+    }
+
+    // Si el tiempo aún no ha terminado
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = String(days).padStart(2, '0');
+    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+}
+
+let countdownInterval = setInterval(updateCountdown, 1000);
+// Llama una vez inmediatamente para que no haya un segundo de retraso al cargar la página
+updateCountdown();

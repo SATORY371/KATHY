@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎉 Feliz Cumpleaños, Doctora Veterinaria 🐾</title>
+  <meta name="description" content="Regalo web interactivo de cumpleaños para una veterinaria: confeti, juegos, cuenta regresiva, mensajes y más." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* VARIABLES CSS PERSONALIZADAS: FÁCIL PERSONALIZACIÓN */
+    :root {
+      --bg: #0e0f13; /* Fondo base: un gris oscuro */
+      --panel: #141723; /* Paneles y tarjetas con un tono más oscuro */
+      --card: #171a26; /* Fondo de tarjetas */
+      --soft: #21263a; /* Bordes y separadores suaves */
+      --accent: #7ee787; /* Color principal de acento: verde menta */
+      --accent-2: #a78bfa; /* Segundo acento: lavanda */
+      --accent-3: #ffb86b; /* Tercer acento: durazno */
+      --txt: #e6edf3; /* Color de texto principal: gris claro */
+      --muted: #9aa7b2; /* Texto tenue o secundario */
+      --good: #22c55e; /* Color para éxito o correcto */
+      --warn: #f59e0b; /* Color para advertencia */
+      --love: #ff6b9e; /* Color para amor o sorpresa */
+    }
+
+    /* TEMA CLARO OPCIONAL: Invertir los colores para un modo claro */
+    .tema-claro {
+      --bg: #f7f8fc;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --soft: #e8eaf3;
+      --accent: #16a34a;
+      --accent-2: #6d28d9;
+      --accent-3: #fb923c;
+      --txt: #0f172a;
+      --muted: #475569;
+      --good: #16a34a;
+      --warn: #d97706;
+      --love: #e11d48;
+    }
+
+    /* REINICIO BÁSICO Y FUENTES */
+    *, *::before, *::after {
+      box-sizing: border-box; /* Modelo de caja universal */
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      /* Fondo con degradado radial sutil */
+      background: radial-gradient(1200px 1200px at 80% -10%, rgba(126, 231, 135, .08), transparent),
+                  radial-gradient(1000px 800px at 10% 10%, rgba(167, 139, 250, .08), transparent),
+                  var(--bg);
+      color: var(--txt);
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* LAYOUT PRINCIPAL: FLEXBOX PARA UNA SOLA COLUMNA */
+    .single-column-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: min(768px, 96%); /* Ancho máximo para una columna legible */
+      margin: 0 auto;
+      padding-top: 24px;
+    }
+
+    /* SECCIÓN HERO (ENCABEZADO) */
+    header.hero {
+      position: relative;
+      padding: 64px 0 48px;
+      overflow: hidden;
+    }
+
+    header .glow {
+      position: absolute;
+      inset: -20% -20% auto auto;
+      width: 60vmax;
+      height: 60vmax;
+      filter: blur(90px);
+      background: radial-gradient(closest-side, rgba(126, 231, 135, .14), transparent 60%),
+                  radial-gradient(closest-side, rgba(167, 139, 250, .14), transparent 60%),
+                  radial-gradient(closest-side, rgba(255, 184, 107, .12), transparent 60%);
+      pointer-events: none;
+      z-index: -1;
+      opacity: .9;
+    }
+
+    .hero-card {
+      background: linear-gradient(155deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, 0)), var(--panel);
+      border: 1px solid var(--soft);
+      border-radius: 28px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(2px); /* Efecto de cristal esmerilado */
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-left, .hero-right {
+      width: 100%;
+    }
+
+    h1.title {
+      font-size: clamp(28px, 4vw, 56px); /* Tamaño de fuente adaptable */
+      line-height: 1.1;
+      margin: 0 0 8px;
+      letter-spacing: .5px;
+    }
+
+    .subtitle {
+      font-size: clamp(14px, 1.6vw, 18px);
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 14px 0 22px;
+    }
+
+    .badge {
+      border: 1px dashed var(--accent);
+      color: var(--accent);
+      padding: 6px 10px;
+      border-radius: 999px; /* Pill shape */
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ESTILO DE BOTONES */
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      border-radius: 14px;
+      padding: 14px 18px;
+      letter-spacing: .4px;
+      transition: .2s transform ease, .3s box-shadow ease, .3s background ease, .3s color ease;
+      outline: none;
+      position: relative;
+      font-family: inherit;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #0b1220;
+      box-shadow: 0 6px 18px rgba(126, 231, 135, .18), 0 2px 8px rgba(167, 139, 250, .15);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--txt);
+      border: 1px solid var(--soft);
+    }
+
+    .hero-paws {
+      position: absolute;
+      right: -120px;
+      bottom: -40px;
+      width: min(60vmin, 580px);
+      opacity: .18;
+      pointer-events: none;
+      transform: rotate(-12deg);
+    }
+
+    /* ESTILO DE SECCIONES Y TARJETAS */
+    .section {
+      margin: 40px 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--soft);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .cols-3 {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .kpi {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .kpi .val {
+      font-size: 28px;
+      font-weight: 800;
+      font-family: "Fira Sans", monospace;
+    }
+
+    .kpi .lab {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* CUENTA REGRESIVA */
+    .countdown {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 0;
+    }
+
+    .cd-box {
+      min-width: 84px;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid var(--soft);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .05), transparent);
+      text-align: center;
+    }
+
+    .cd-num {
+      font-size: 26px;
+      font-weight: 800;
+      font-family: "Fira Sans", monospace;
+    }
+
+    .cd-lab {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* GALERÍA */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .gallery .img {
+      flex: 1 1 120px; /* Se expanden pero con un ancho base */
+      height: 160px;
+      border-radius: 18px;
+      border: 1px solid var(--soft);
+      display: grid;
+      place-items: center;
+      font-size: 56px;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .12));
+      background: radial-gradient(200px 200px at 70% 20%, rgba(255, 255, 255, .06), transparent), var(--panel);
+      transition: all 0.3s ease; /* Transición para efecto hover */
+    }
+
+    .img:hover {
+      transform: translateY(-4px); /* Efecto flotante al pasar el mouse */
+      box-shadow: 0 10px 20px rgba(126, 231, 135, .25);
+    }
+    
+    .img span {
+      transform: translateY(-6px);
+    }
+
+    /* TARJETA DE FELICITACIÓN */
+    .note {
+      position: relative;
+      padding: 16px;
+      background: conic-gradient(from 180deg at 50% 50%, rgba(255, 255, 255, .05), transparent 60%), var(--card);
+      border: 1px solid var(--soft);
+      border-radius: 20px;
+    }
+
+    .note h3 {
+      margin: 8px 0 6px;
+    }
+
+    .note p {
+      margin: 0;
+    }
+
+    /* ÁREA DE DESEOS (Pizarrón) */
+    .wish-board {
+      position: relative;
+      min-height: 240px;
+      border: 1px dashed var(--soft);
+      border-radius: 16px;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .sticky {
+      position: absolute;
+      min-width: 160px;
+      max-width: 220px;
+      padding: 12px 12px 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, .1);
+      box-shadow: 0 12px 22px rgba(0, 0, 0, .25);
+      transform: rotate(var(--rot));
+      background: var(--bgSticky);
+      color: #0f172a;
+      cursor: grab;
+      transition: transform 0.2s ease;
+    }
+    
+    .sticky:active {
+      cursor: grabbing;
+    }
+
+    .sticky b {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* MINI JUEGO: Quiz */
+    .quiz {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .q {
+      font-weight: 700;
+    }
+
+    .opt {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .opt input {
+      accent-color: var(--accent);
+    }
+
+    .result {
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    /* FOOTER Y CONTROLES */
+    footer {
+      margin: 60px 0 30px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* MODAL SIMPLE */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 60;
+      animation: fadeIn .3s ease-out;
+    }
+
+    .modal .box {
+      background: var(--panel);
+      border: 1px solid var(--soft);
+      border-radius: 18px;
+      padding: 20px;
+      width: min(680px, 92%);
+      animation: slideIn .4s ease-out;
+    }
+
+    /* CURSOR DE HUELLITAS */
+    .paw {
+      position: fixed;
+      pointer-events: none;
+      font-size: 18px;
+      opacity: .7;
+      will-change: transform;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .3));
+    }
+
+    /* CANVAS DE FUEGOS ARTIFICIALES */
+    #fx {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    /* BOTÓN FLOTANTE PARA SORPRESAS */
+    .fab {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+    }
+
+    /* SEPARADORES LINDOS */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--soft), transparent);
+      margin: 14px 0;
+    }
+
+    /* ANIMACIONES */
+    @keyframes floaty {
+      0% { transform: translateY(0) }
+      50% { transform: translateY(-6px) }
+      100% { transform: translateY(0) }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(.9); opacity: 0 }
+      100% { transform: scale(1); opacity: 1 }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes confetti {
+      0% { transform: translateY(-10vh) rotate(0) }
+      100% { transform: translateY(110vh) rotate(720deg) }
+    }
+
+    .floating {
+      animation: floaty 4s ease-in-out infinite;
+    }
+
+    .pop {
+      animation: pop .35s ease both;
+    }
+
+    /* TIMELINE DE LOGROS/VALORES VETERINARIOS */
+    .timeline {
+      border-left: 2px dashed var(--soft);
+      padding-left: 14px;
+      margin-left: 8px;
+    }
+
+    .timeline .item {
+      position: relative;
+      margin: 12px 0 12px 6px;
+    }
+
+    .timeline .item::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 4px rgba(126, 231, 135, .12);
+    }
+
+    /* ACCESIBILIDAD */
+    .sr-only {
+      position: absolute !important;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap;
+    }
+    
+    /* MEJORAS DE DISEÑO RESPONSIVO (MOBILE FIRST) */
+    .hero-content {
+      flex-direction: column;
+    }
+
+    .hero-right {
+      order: -1;
+    }
+
+    @media (min-width: 768px) {
+      .hero-content {
+        flex-direction: row;
+      }
+
+      .hero-right {
+        order: 0;
+      }
+    }
+    @media (max-width: 500px) {
+      .cd-box {
+        min-width: 60px;
+        padding: 8px 4px;
+      }
+      .cd-num {
+        font-size: 20px;
+      }
+      .cd-lab {
+        font-size: 10px;
+      }
+      .note h3 {
+        font-size: 1.2em;
+      }
+      .note p {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <header class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="single-column-container">
+      <div class="hero-card">
+        <img class="hero-paws floating" alt="Huellitas decorativas" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' width='640' height='420' viewBox='0 0 640 420'><g fill='%23a78bfa'><circle cx='120' cy='120' r='28'/><circle cx='168' cy='92' r='18'/><circle cx='96' cy='84' r='18'/><circle cx='140' cy='66' r='14'/><circle cx='104' cy='158' r='14'/></g><g fill='%237ee787' transform='translate(320 160) scale(1.2)'><circle cx='120' cy='120' r='28'/><circle cx='168' cy='92' r='18'/><circle cx='96' cy='84' r='18'/><circle cx='140' cy='66' r='14'/><circle cx='104' cy='158' r='14'/></g></svg>"/>
+        <div class="hero-content">
+          <div class="hero-left">
+            <div class="badges">
+              <div class="badge">30 de Agosto 🎂</div>
+              <div class="badge">🐶🐱 Amor por los animales</div>
+              <div class="badge">Regalo hecho con cariño 💖</div>
+            </div>
+            <h1 class="title">¡Feliz Cumpleaños, <span id="nombreSpan">KATHY</span>! 🐾</h1>
+            <p class="subtitle">Que tu vocación por sanar patitas y corazones te regrese multiplicada en sonrisas y milagros. Este sitio es un regalito interactivo para celebrar tu día: cuenta regresiva, fuegos artificiales, juegos, mensajes y sorpresas. ✨</p>
+
+            <div class="cta-row">
+              <button class="btn btn-primary" id="btnConfeti">Lanzar confeti</button>
+              <button class="btn btn-ghost" id="btnMusica" aria-pressed="false">♪ Reproducir canción</button>
+              <button class="btn btn-ghost" id="btnTema">Cambiar tema</button>
+              <button class="btn btn-ghost" id="btnEditarNombre" title="Editar nombre de la cumpleañera">✎ Editar nombre</button>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="card pop" aria-live="polite">
+              <div style="text-align:center; font-weight:700; margin-bottom:6px">Cuenta regresiva</div>
+              <div id="countdown" class="countdown" role="timer" aria-label="Cuenta regresiva a la medianoche del 30 de agosto"></div>
+              <div class="divider"></div>
+              <div class="kpi"><div class="val" id="animalesAtendidos">0</div><div class="lab">Buenas acciones por los animales (estimado hoy 🐾)</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="single-column-container">
+    <section class="section cols-3" aria-label="Sección de valores y deseos">
+      <article class="card">
+        <h2>🌟 Deseo #1</h2>
+        <p>Que cada latido que ayudas a mantener se convierta en un recuerdo feliz. Hoy celebramos tu vida y la de todos los peluditos que has cuidado. 💚</p>
+        <div class="divider"></div>
+        <div class="timeline">
+          <div class="item">Empatía que calma — tu superpoder favorito.</div>
+          <div class="item">Ciencia con corazón — diagnósticos precisos y manos suaves.</div>
+          <div class="item">Trabajo en equipo — humanos y peludos agradecidos.</div>
+        </div>
+      </article>
+      <article class="card">
+        <h2>🩺 Deseo #2</h2>
+        <p>Que nunca te falte energía para seguir cuidando, estudiando y soñando. Que el universo conspire para darte guardias ligeras y pacientes agradecidos.</p>
+        <div class="divider"></div>
+        <div class="kpi"><div class="val" id="kpiSonrisas">0</div><div class="lab">Sonrisas provocadas hoy</div></div>
+      </article>
+      <article class="card">
+        <h2>🎁 Sorpresa</h2>
+        <p>Haz clic en cualquier parte de la pantalla para ver fuegos artificiales. Mantén presionado para una lluvia de estrellas. Y… prueba el botón mágico flotante. 😉</p>
+        <div class="divider"></div>
+        <div class="controls">
+          <button id="btnModal" class="btn btn-primary">Abrir tarjeta especial</button>
+          <button id="btnPista" class="btn btn-ghost">Pista de la sorpresa</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="section card" aria-label="Tarjeta de felicitación">
+      <div class="note">
+        <h3>💌 Tarjeta para <span id="nombreSpan2">Doctora</span></h3>
+        <p id="mensajeFeliz">Hoy celebramos a una profesional increíble y a un ser humano aún más grande. Gracias por hablar el idioma de los que no pueden hablar y escuchar con el corazón. ¡Feliz cumpleaños! 🥳</p>
+        <div class="divider"></div>
+        <form id="formMensaje" autocomplete="off">
+          <label for="inputMensaje" class="sr-only">Editar mensaje</label>
+          <input id="inputMensaje" name="mensaje" class="card" style="width:100%; padding:12px; border-radius:12px; border:1px solid var(--soft); background:var(--panel); color:var(--txt)" placeholder="Escribe aquí tu dedicatoria (Enter para guardar)" />
+        </form>
+      </div>
+    </section>
+
+    <section class="section card" aria-label="Galería de peluditos felices">
+      <h2>📸 Galería de alegría</h2>
+      <p>Pequeños embajadores del cariño. (Consejo: pasa el cursor o toca para ver una chispa ✨).</p>
+      <div class="gallery" id="galeria">
+        <div class="img" tabindex="0" aria-label="Gatito feliz"><span>🐱</span></div>
+        <div class="img" tabindex="0" aria-label="Perrito juguetón"><span>🐶</span></div>
+        <div class="img" tabindex="0" aria-label="Conejito tierno"><span>🐰</span></div>
+        <div class="img" tabindex="0" aria-label="Loro colorido"><span>🦜</span></div>
+        <div class="img" tabindex="0" aria-label="Erizo curioso"><span>🦔</span></div>
+        <div class="img" tabindex="0" aria-label="Hámster comelón"><span>🐹</span></div>
+        <div class="img" tabindex="0" aria-label="Perrito amoroso"><span>🐕‍🦺</span></div>
+        <div class="img" tabindex="0" aria-label="Gatito elegante"><span>🐈‍⬛</span></div>
+      </div>
+    </section>
+
+    <section class="section cols-3" aria-label="Juegos y diversión">
+      <article class="card">
+        <h2>🎮 Mini-Quiz veterinario</h2>
+        <div class="quiz" id="quiz">
+          <div class="q">1) ¿Cuál es la temperatura corporal normal de un perro adulto?</div>
+          <label class="opt"><input type="radio" name="q1" value="a"> 34–36°C</label>
+          <label class="opt"><input type="radio" name="q1" value="b"> 37.5–39.2°C</label>
+          <label class="opt"><input type="radio" name="q1" value="c"> 40–41.5°C</label>
+          <div class="divider"></div>
+
+          <div class="q">2) Un gato que ronronea fuertemente suele indicar…</div>
+          <label class="opt"><input type="radio" name="q2" value="a"> Siempre dolor</label>
+          <label class="opt"><input type="radio" name="q2" value="b"> Relajación/afecto (aunque a veces también dolor)</label>
+          <label class="opt"><input type="radio" name="q2" value="c"> Hambre extremo</label>
+          <div class="divider"></div>
+
+          <div class="q">3) ¿Cada cuánto se recomienda cortar uñas a perros/gatos caseros?</div>
+          <label class="opt"><input type="radio" name="q3" value="a"> Una vez al año</label>
+          <label class="opt"><input type="radio" name="q3" value="b"> Cada 3–6 semanas</label>
+          <label class="opt"><input type="radio" name="q3" value="c"> Nunca</label>
+
+          <div class="divider"></div>
+          <button class="btn btn-primary" id="btnQuiz">Comprobar respuestas</button>
+          <div id="quizRes" class="result" role="status" aria-live="polite"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>🔊 Adivina el sonido</h2>
+        <p>¿Miau o Guau? Reproduce y adivina. (Generados con WebAudio, sin archivos externos).</p>
+        <div class="controls">
+          <button class="btn btn-ghost" data-snd="miau">Reproducir sonido 1</button>
+          <button class="btn btn-ghost" data-snd="guau">Reproducir sonido 2</button>
+          <button class="btn btn-primary" id="btnRevelar">Revelar</button>
+        </div>
+        <div id="resSnd" class="result"></div>
+      </article>
+
+      <article class="card">
+        <h2>📝 Muro de deseos</h2>
+        <p>Escribe un deseo y suéltalo en el tablero. Arrastra para reubicar. Doble clic para eliminar.</p>
+        <div class="controls" style="margin-bottom:10px">
+          <input id="deseoTxt" class="card" placeholder="Escribe un deseo…" style="flex:1; padding:10px; border-radius:12px; border:1px solid var(--soft); background:var(--panel); color:var(--txt)" />
+          <button class="btn btn-primary" id="addDeseo">Agregar</button>
+        </div>
+        <div class="wish-board" id="board" aria-live="polite"></div>
+      </article>
+    </section>
+
+    <section class="section card" aria-label="Créditos y personalización">
+      <h2>⚙️ Personaliza esta página</h2>
+      <p>Este regalo es 100% editable. Puedes cambiar el nombre, el mensaje, el tema, y 
+        agregar/quitar notas. Si quieres, imprime como póster (Ctrl/Cmd + P) o guarda como PDF.</p>
+      <ul>
+        <li>Haz clic en <b>✎ Editar nombre</b> para que esta página se sienta completamente tuya.</li>
+<li>Presiona <b>♪ Reproducir</b> y deja que una pequeña melodía, creada solo para ti, te cuente lo que siento.</li>
+<li>
+  Sabes que me expreso mejor con código. Por eso, cada línea, cada función, cada pixel de esta página ha sido escrito con el único propósito de decirte lo mucho que te quiero.
+  Espero que este 30 de agosto, te tomes un momento para recordar lo increíble que eres y lo afortunados que somos quienes te conocemos.
+</li>
+<li>Usa el botón flotante para la <i>mega</i> sorpresa. Es el final perfecto para este código que lleva tu nombre. 👇</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    Hecho con cariño para celebrar a una gran veterinaria. 🐾<br />
+    <small><p>&copy;Todos los derechos reservados. <a href="https://satory371.github.io/Satory_web/" style="color: aqua;">SATORY</a></p></small>
+  </footer>
+
+  <div class="fab">
+    <button id="btnMega" class="btn btn-primary" title="Sorpresa mega">✨ Mega sorpresa</button>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="box">
+      <h3>🎂 Tarjeta especial</h3>
+      <p>Que la salud y la alegría te acompañen en cada consulta, que tu corazón tenga siempre espacio para una patita más, y que este año te regale momentos extraordinarios. ¡Feliz cumpleaños, <span id="nombreSpan3">Doctora</span>!</p>
+      <div class="divider"></div>
+      <div class="controls" style="justify-content:flex-end">
+        <button class="btn btn-ghost" id="cerrarModal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="song" preload="auto"></audio>
+
+  <script>
+    // ===================== UTILIDADES =====================
+    const $ = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+    // Persistencia simple con localStorage
+    const store = {
+      get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
+      set(k, v) { localStorage.setItem(k, JSON.stringify(v)) }
+    };
+
+    // ===================== NOMBRE =====================
+    const nombreSpans = $$('#nombreSpan, #nombreSpan2, #nombreSpan3');
+    function setNombre(n) {
+      nombreSpans.forEach(span => span.textContent = n);
+      store.set('nombreCumple', n);
+      document.title = `🎉 Feliz Cumple, ${n} 🐾`;
+    }
+    (function initNombre() {
+      const guardado = store.get('nombreCumple');
+      if (guardado) {
+        setNombre(guardado);
+      } else {
+        setTimeout(() => {
+          const n = prompt('¿Cómo se llama la cumpleañera? (Ej. Katherine, Valeria, etc.)', 'Doctora');
+          if (n && n.trim().length > 0) setNombre(n.trim());
+        }, 300);
+      }
+    })();
+    $('#btnEditarNombre').addEventListener('click', () => {
+      const n = prompt('Editar nombre de la cumpleañera:', nombreSpans[0].textContent);
+      if (n && n.trim()) setNombre(n.trim());
+    });
+    
+    // ===================== CAMBIAR TEMA (MODO CLARO/OSCURO) =====================
+    $('#btnTema').addEventListener('click', () => {
+      document.body.classList.toggle('tema-claro');
+    });
+
+    // ===================== CUENTA REGRESIVA =====================
+    const countdown = $('#countdown');
+    function renderCountdown() {
+      // Meta: 30 de agosto del año actual a las 00:00 en hora local
+      const now = new Date();
+      const year = now.getFullYear();
+      const target = new Date(year, 7, 30, 0, 0, 0); // Mes 7 = agosto (0-index)
+      // Si ya pasó el 30, apuntar al próximo año
+      if (now > target) target.setFullYear(year + 1);
+      const diff = target - now;
+      const s = Math.max(0, Math.floor(diff / 1000));
+      const d = Math.floor(s / 86400);
+      const h = Math.floor((s % 86400) / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sc = s % 60;
+
+      countdown.innerHTML = `
+        <div class="cd-box"><div class="cd-num">${String(d).padStart(2, '0')}</div><div class="cd-lab">días</div></div>
+        <div class="cd-box"><div class="cd-num">${String(h).padStart(2, '0')}</div><div class="cd-lab">horas</div></div>
+        <div class="cd-box"><div class="cd-num">${String(m).padStart(2, '0')}</div><div class="cd-lab">min</div></div>
+        <div class="cd-box"><div class="cd-num">${String(sc).padStart(2, '0')}</div><div class="cd-lab">seg</div></div>`;
+    }
+    setInterval(renderCountdown, 1000);
+    renderCountdown();
+
+    // KPI de animales atendidos (estimación divertida)
+    const animalesAtendidos = $('#animalesAtendidos');
+    const kpiSonrisas = $('#kpiSonrisas');
+
+    function randomRange(a, b) {
+      return Math.floor(Math.random() * (b - a + 1)) + a
+    }
+
+    function tickKpis() {
+      animalesAtendidos.textContent = randomRange(3, 12);
+      kpiSonrisas.textContent = randomRange(20, 80);
+    }
+    setInterval(tickKpis, 4000);
+    tickKpis();
+
+    // ===================== CONFETI =====================
+    function confeti(colorA, colorB) {
+      const n = 140;
+      for (let i = 0; i < n; i++) {
+        const c = document.createElement('div');
+        const size = Math.random() * 8 + 6;
+        c.style.position = 'fixed';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.top = '-10vh';
+        c.style.width = size + 'px';
+        c.style.height = size * 0.6 + 'px';
+        c.style.background = `linear-gradient(90deg, ${colorA}, ${colorB})`;
+        c.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+        c.style.opacity = .9;
+        c.style.borderRadius = '4px';
+        c.style.zIndex = 30;
+        c.style.pointerEvents = 'none';
+        c.style.animation = `confetti ${2 + Math.random() * 2}s linear forwards`;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4500);
+      }
+    }
+    $('#btnConfeti').addEventListener('click', () => confeti('var(--accent)', 'var(--accent-2)'));
+
+    // ===================== CANCIÓN =====================
+    const btnMusica = $('#btnMusica');
+    let audioCtx;
+    function playMelody() {
+      if (!audioCtx) {
+        audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+      }
+      
+      const notes = [
+        392, 392, 440, 392, 523, 494, // Happy birthday to you
+        392, 392, 440, 392, 587, 523,
+        392, 392, 784, 659, 523, 494, 440,
+        698, 698, 659, 523, 587, 523
+      ];
+      const now = audioCtx.currentTime;
+      let t = now;
+      notes.forEach((freq, i) => {
+        const o = audioCtx.createOscillator();
+        o.type = 'sine';
+        o.frequency.value = freq;
+        const g = audioCtx.createGain();
+        g.gain.setValueAtTime(0.00001, t);
+        g.gain.exponentialRampToValueAtTime(0.2, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.00001, t + 0.38);
+        o.connect(g).connect(audioCtx.destination);
+        o.start(t);
+        o.stop(t + 0.4);
+        t += 0.42;
+      });
+    }
+    btnMusica.addEventListener('click', () => {
+      playMelody();
+      btnMusica.textContent = '♪ ¡Que suene!';
+      btnMusica.setAttribute('aria-pressed', 'true');
+    });
+
+    // ===================== GALERÍA (sparkle) =====================
+    $$('.gallery .img').forEach(el => {
+      el.addEventListener('pointerenter', () => {
+        el.style.boxShadow = '0 10px 24px rgba(126, 231, 135, .25)';
+        spark(el);
+      })
+      el.addEventListener('pointerleave', () => {
+        el.style.boxShadow = 'none'
+      })
+      el.addEventListener('click', () => {
+        spark(el);
+      })
+    });
+
+    function spark(el) {
+      const s = document.createElement('div');
+      s.textContent = '✨';
+      s.style.position = 'absolute';
+      s.style.fontSize = '28px';
+      const r = el.getBoundingClientRect();
+      s.style.left = (r.left + r.width / 2 + (Math.random() * 30 - 15)) + 'px';
+      s.style.top = (r.top + 10) + 'px';
+      s.style.zIndex = 35;
+      s.style.animation = 'pop .35s ease both';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 600);
+    }
+
+    // ===================== QUIZ =====================
+    $('#btnQuiz').addEventListener('click', () => {
+      const correctas = { q1: 'b', q2: 'b', q3: 'b' };
+      let puntos = 0;
+      Object.entries(correctas).forEach(([q, v]) => {
+        const ans = document.querySelector(`[name="${q}"]:checked`);
+        if (ans && ans.value === v) puntos++;
+      });
+      const res = $('#quizRes');
+      res.textContent = `Puntaje: ${puntos}/3 ${puntos === 3 ? '🐾 ¡Experta!' : puntos === 2 ? '💚 ¡Casi perfecto!' : '✨ ¡A seguir jugando!'} `;
+    });
+
+    // ===================== SONIDOS (Miau/Guau) =====================
+    let sndCtx;
+
+    function playSnd(type) {
+      sndCtx = sndCtx || new(window.AudioContext || window.webkitAudioContext)();
+      const g = sndCtx.createGain();
+      g.gain.value = 0.2;
+      g.connect(sndCtx.destination);
+      if (type === 'miau') {
+        const o1 = sndCtx.createOscillator();
+        o1.type = 'triangle';
+        o1.frequency.setValueAtTime(660, sndCtx.currentTime);
+        o1.frequency.exponentialRampToValueAtTime(330, sndCtx.currentTime + 0.25);
+        const o2 = sndCtx.createOscillator();
+        o2.type = 'sine';
+        o2.frequency.setValueAtTime(550, sndCtx.currentTime + 0.1);
+        o2.frequency.exponentialRampToValueAtTime(280, sndCtx.currentTime + 0.35);
+        o1.connect(g);
+        o2.connect(g);
+        o1.start();
+        o2.start();
+        o1.stop(sndCtx.currentTime + 0.4);
+        o2.stop(sndCtx.currentTime + 0.45);
+      } else {
+        const o = sndCtx.createOscillator();
+        o.type = 'square';
+        o.frequency.setValueAtTime(220, sndCtx.currentTime);
+        o.frequency.exponentialRampToValueAtTime(110, sndCtx.currentTime + 0.15);
+        const gn = sndCtx.createGain();
+        gn.gain.setValueAtTime(0.0001, sndCtx.currentTime);
+        gn.gain.exponentialRampToValueAtTime(0.25, sndCtx.currentTime + 0.02);
+        gn.gain.exponentialRampToValueAtTime(0.0001, sndCtx.currentTime + 0.22);
+        o.connect(gn).connect(g);
+        o.start();
+        o.stop(sndCtx.currentTime + 0.25);
+      }
+    }
+    $$('button[data-snd]').forEach(b => b.addEventListener('click', () => {
+      playSnd(b.dataset.snd);
+      $('#resSnd').textContent = '(¡Escucha y adivina!)';
+    }));
+    $('#btnRevelar').addEventListener('click', () => {
+      $('#resSnd').textContent = 'Sonido 1 = Miau 🐱, Sonido 2 = Guau 🐶';
+    });
+    
+    // ===================== MENSAJE DE LA TARJETA =====================
+    const mensajeFeliz = $('#mensajeFeliz');
+    const inputMensaje = $('#inputMensaje');
+    
+    function setMensaje(msg) {
+      mensajeFeliz.textContent = msg;
+      store.set('mensajeFeliz', msg);
+    }
+    
+    // Cargar mensaje guardado
+    const mensajeGuardado = store.get('mensajeFeliz');
+    if (mensajeGuardado) {
+      setMensaje(mensajeGuardado);
+    }
+    
+    $('#formMensaje').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nuevoMensaje = inputMensaje.value.trim();
+      if (nuevoMensaje) {
+        setMensaje(nuevoMensaje);
+        inputMensaje.value = '';
+      }
+    });
+
+    // ===================== MURO DE DESEOS =====================
+    const board = $('#board'),
+      deseoTxt = $('#deseoTxt');
+
+    function addSticky(text) {
+      const d = document.createElement('div');
+      d.className = 'sticky';
+      const boardRect = board.getBoundingClientRect();
+      const maxLeft = boardRect.width - 220;
+      const maxTop = boardRect.height - 120;
+      d.style.left = Math.random() * Math.max(0, maxLeft) + 'px';
+      d.style.top = Math.random() * Math.max(0, maxTop) + 'px';
+      d.style.setProperty('--rot', (Math.random() * 10 - 5) + 'deg');
+      d.style.setProperty('--bgSticky', `hsl(${Math.random() * 360}, 90%, 85%)`);
+      d.innerHTML = `<b>Deseo</b>${text}`;
+      d.setAttribute('role', 'note');
+
+      // Drag
+      let offX = 0,
+        offY = 0,
+        dragging = false;
+      d.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        offX = e.offsetX;
+        offY = e.offsetY;
+        d.setPointerCapture(e.pointerId);
+      });
+      d.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const r = board.getBoundingClientRect();
+        d.style.left = (e.clientX - r.left - offX) + 'px';
+        d.style.top = (e.clientY - r.top - offY) + 'px';
+      });
+      d.addEventListener('pointerup', () => dragging = false);
+
+      d.addEventListener('dblclick', () => d.remove());
+
+      board.appendChild(d);
+    }
+    $('#addDeseo').addEventListener('click', () => {
+      const t = deseoTxt.value.trim();
+      if (!t) return;
+      addSticky(t);
+      deseoTxt.value = '';
+    });
+    
+    // Hacer el board de deseos responsive, ajustando la posición de los "stickies" al redimensionar
+    let observer = new ResizeObserver(entries => {
+      const boardRect = board.getBoundingClientRect();
+      const stickies = $$('.sticky');
+      stickies.forEach(sticky => {
+        const currentLeft = parseFloat(sticky.style.left);
+        const currentTop = parseFloat(sticky.style.top);
+        sticky.style.left = Math.min(currentLeft, boardRect.width - sticky.clientWidth - 10) + 'px';
+        sticky.style.top = Math.min(currentTop, boardRect.height - sticky.clientHeight - 10) + 'px';
+      });
+    });
+    observer.observe(board);
+
+    // ===================== MODAL =====================
+    const modal = $('#modal');
+    $('#btnModal').addEventListener('click', () => {
+      modal.style.display = 'flex';
+      setTimeout(() => modal.querySelector('.box').classList.add('pop'), 10);
+    })
+    $('#cerrarModal').addEventListener('click', () => {
+      modal.style.display = 'none';
+    })
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    })
+
+    // ===================== PISTA =====================
+    $('#btnPista').addEventListener('click', () => {
+      alert('Pista: el botón mega ✨ crea un momento estrella con fuegos artificiales, confeti y mensaje personalizado.');
+    });
+
+    // ===================== FIREWORKS =====================
+    const fx = document.getElementById('fx');
+    const ctx = fx.getContext('2d');
+    let W = fx.width = innerWidth,
+      H = fx.height = innerHeight;
+    window.addEventListener('resize', () => {
+      W = fx.width = innerWidth;
+      H = fx.height = innerHeight;
+    });
+
+    const bursts = [];
+
+    function firework(x, y, hue) {
+      const particles = [];
+      const count = 80;
+      for (let i = 0; i < count; i++) {
+        const ang = (Math.PI * 2) * (i / count);
+        const speed = Math.random() * 3 + 1.5;
+        particles.push({
+          x,
+          y,
+          vx: Math.cos(ang) * speed,
+          vy: Math.sin(ang) * speed,
+          life: 60 + Math.random() * 20,
+          age: 0,
+          hue
+        });
+      }
+      bursts.push(particles);
+    }
+
+    function loop() {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = 'rgba(0,0,0,0.25)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+
+      for (let i = bursts.length - 1; i >= 0; i--) {
+        const ps = bursts[i];
+        for (let p = ps.length - 1; p >= 0; p--) {
+          const o = ps[p];
+          o.x += o.vx;
+          o.y += o.vy;
+          o.vy += 0.02;
+          o.age++;
+          const alpha = Math.max(0, 1 - o.age / o.life);
+          ctx.beginPath();
+          ctx.arc(o.x, o.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${o.hue}, 98%, 60%, ${alpha})`;
+          ctx.fill();
+          if (o.age > o.life) ps.splice(p, 1);
+        }
+        if (ps.length === 0) bursts.splice(i, 1);
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    let pressTimer;
+    window.addEventListener('pointerdown', (e) => {
+      const hue = Math.floor(Math.random() * 360);
+      firework(e.clientX, e.clientY, hue);
+      pressTimer = setInterval(() => firework(e.clientX, e.clientY, Math.floor(Math.random() * 360)), 200);
+    });
+    window.addEventListener('pointerup', () => clearInterval(pressTimer));
+
+    // ===================== HUELLA CURSOR =====================
+    const paws = ['🐾', '🐾', '🐾', '💖'];
+    let pawIdx = 0;
+    window.addEventListener('pointermove', (e) => {
+      if (Math.random() < 0.12) {
+        const p = document.createElement('div');
+        p.className = 'paw';
+        p.textContent = paws[pawIdx++ % paws.length];
+        p.style.left = (e.clientX + (Math.random() * 12 - 6)) + 'px';
+        p.style.top = (e.clientY + (Math.random() * 12 - 4)) + 'px';
+        p.style.transform = `scale(${.7 + Math.random() * 0.6}) rotate(${Math.random() * 40 - 20}deg)`;
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 900);
+      }
+    });
+
+    // ===================== MEGA SORPRESA =====================
+    $('#btnMega').addEventListener('click', () => {
+      const n = nombreSpans[0].textContent || 'Doctora';
+      for (let i = 0; i < 3; i++) setTimeout(() => confeti('var(--accent-3)', 'var(--love)'), i * 300);
+      for (let i = 0; i < 5; i++) setTimeout(() => firework(Math.random() * W, Math.random() * H * 0.7 + H * 0.1, Math.floor(Math.random() * 360)), 200 + i * 200);
+
+      const banner = document.createElement('div');
+      banner.style.position = 'fixed';
+      banner.style.left = '50%';
+      banner.style.top = '10%';
+      banner.style.transform = 'translateX(-50%)';
+      banner.style.background = 'linear-gradient(90deg, var(--accent), var(--accent-2))';
+      banner.style.color = '#0b1220';
+      banner.style.padding = '14px 18px';
+      banner.style.borderRadius = '14px';
+      banner.style.fontWeight = '800';
+      banner.style.zIndex = 55;
+      banner.style.boxShadow = '0 12px 28px rgba(0,0,0,.35)';
+      banner.textContent = `¡Feliz cumpleaños, ${n}! ✨`;
+      document.body.appendChild(banner);
+      setTimeout(() => banner.remove(), 2400);
+    });
+  </script>
+</body>
+</html>

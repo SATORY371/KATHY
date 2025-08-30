@@ -9,7 +9,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&family=Georgia:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilo.css">
 </head>
+<style>
+    .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Lo envía al fondo, detrás del resto del contenido */
+}
+
+/* El contenedor principal debe ser relativo para que el video se posicione correctamente */
+.item {
+    position: relative;
+    overflow: hidden;
+    /* Añade aquí las dimensiones que desees para tu contenedor */
+}
+</style>
 <body>
+
+    <div class="item" id="lock-screen" style="background-image: url('https://images.unsplash.com/photo-1499571350106-93370327f12e?q=80&w=1974&auto=format&fit=crop');">
+        <div class="slide-content">
+            <h2 class="title" style="color: #333;">¡Una sorpresa te espera!</h2>
+            <p class="subtitle" style="color: #555; margin-top: 30px;">Se desbloqueará en:</p>
+            <div id="countdown">
+                <div><span id="days">00</span><span>Días</span></div>
+                <div><span id="hours">00</span><span>Horas</span></div>
+                <div><span id="minutes">00</span><span>Minutos</span></div>
+                <div><span id="seconds">00</span><span>Segundos</span></div>
+            </div>
+        </div>
+    </div>
 
     <div class="horizontal-scroll-container">
         <div class="item" style="background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1980&auto=format&fit=crop');">
@@ -33,142 +64,93 @@
         </div>
         
         <div class="item single-card-slide" style="background-image: url('media/granger-alluring-enigma-silvanna-alluring-mystique-mlbb-hd-wallpaper-uhdpaper.com-434@3@b.jpg');">
-            <a href="https://www.google.com/maps/search/lugares+romanticos+cerca+de+mi" class="link-card color-2" target="_blank">
+            <a href="faborito.html" class="link-card color-2" target="_blank">
                 <span class="link-icon">🎮</span>
-                <div class="link-title">JUEGOS FABORITOS</div>
-                <div class="link-description">JUGSO QUE DISFRUTAMOS MUCHO JUNTOS</div>
+                <div class="link-title">JUEGO FABORITO</div>
+                <div class="link-description">JUEGO QUE DISFRUTAS MUCHO</div>
             </a>
         </div>
 
-        <div class="item" style="background-image: url('https://images.unsplash.com/photo-1526280760714-f9e742d7FC57?q=80&w=1974&auto=format&fit=crop');">
+        <div class="item" style="background-image: url('media/angela wall.jpg');">
             <div class="slide-content">
-                <h2 class="title" style="color: #333;">Nuestros Momentos</h2>
-                <p class="subtitle" style="color: #555;">Una colección de recuerdos que atesoro.</p>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1515162817882-55097475f422?q=80&w=1974&auto=format&fit=crop" alt="Momento 1">
-                        <div class="gallery-item-caption">Nuestra primera cita bajo las estrellas.</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1518051870910-a46e7071613a?q=80&w=1974&auto=format&fit=crop" alt="Momento 2">
-                        <div class="gallery-item-caption">Esa tarde de risas interminables.</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1999&auto=format&fit=crop" alt="Momento 3">
-                        <div class="gallery-item-caption">El día que descubrimos nuestro lugar favorito.</div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1501746877-c33575306352?q=80&w=1974&auto=format&fit=crop" alt="Momento 4">
-                        <div class="gallery-item-caption">Nuestra aventura en la montaña.</div>
-                    </div>
-                </div>
+                <h2 class="title" style="color: #333;">Momentos épicos que se lograron grasias a ti</h2>
+                <a href="momentos.html" class="link-card color-4" target="_blank">
+                    <div class="link-description">VER MOMENTOS</div>
+                </a>
             </div>
         </div>
 
         <div class="item single-card-slide" style="background-image: url('https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1974&auto=format&fit=crop');">
-            <a href="https://www.netflix.com/browse/genre/8883" class="link-card color-4" target="_blank">
+            <a href="peliculas.html" class="link-card color-4" target="_blank">
                 <span class="link-icon">🎬</span>
-                <div class="link-title">Películas Románticas</div>
-                <div class="link-description">Para nuestras noches de películas perfectas, acurrucados y soñando.</div>
+                <div class="link-title">Doramas, animes y peliculas</div>
+                <div class="link-description">Todos los animes y doramas que vimos con links directos para verlos</div>
             </a>
         </div>
 
-        <div class="item single-card-slide" style="background-image: url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1974&auto=format&fit=crop');">
-            <a href="https://www.goodreads.com/shelf/show/love-poems" class="link-card color-5" target="_blank">
-                <span class="link-icon">📚</span>
-                <div class="link-title">Poemas de Amor</div>
-                <div class="link-description">Palabras que expresan lo que siento, más allá de lo que puedo decir.</div>
-            </a>
-        </div>
-
-        <div class="item" style="background-image: url('https://images.unsplash.com/photo-1508615070457-7baab4ee00b1?q=80&w=2070&auto=format&fit=crop');">
+        <div class="item" style="background-image: url('media/561ff14e93f0761a80080c91ca729508.gif');">
             <div class="personal-message">
-                "Desde el momento en que te conocí, supe que mi vida nunca sería igual. Cada día contigo es una aventura, un aprendizaje y una bendición. Gracias por ser tú, por tu luz, tu risa y tu amor incondicional. Eres el latido de mi corazón."
+                "Desde el momento en que te conocí, supe que mi vida nunca sería igual. Cada 
+                día contigo es una aventura, un aprendizaje y una bendición. Gracias por 
+                ser tú, por tu luz, tu risa y tu cariño incondicional. Eres el latido de mi 
+                corazón."
                 <br><br>
-                <span style="font-size: 0.7em; display: block; margin-top: 20px;">Con todo mi amor, [Tu Nombre]</span>
+                <span style="font-size: 0.7em; display: block; margin-top: 20px;">Con todo mi amor, SATORY</span>
             </div>
         </div>
 
-        <div class="item single-card-slide" style="background-image: url('https://images.unsplash.com/photo-1517823382935-51bfcb0ec6d1?q=80&w=2070&auto=format&fit=crop');">
-            <a href="https://www.pinterest.com/search/pins/?q=romantic%20date%20ideas" class="link-card color-6" target="_blank">
-                <span class="link-icon">💡</span>
-                <div class="link-title">Ideas Románticas</div>
-                <div class="link-description">Inspiración para nuestras aventuras, grandes y pequeñas, siempre juntos.</div>
-            </a>
-        </div>
-
-        <div class="item" style="background-image: url('https://images.unsplash.com/photo-1505373877845-8f2f21a4664a?q=80&w=1974&auto=format&fit=crop');">
+        <div class="item" style="background-image: url('media/—Slidesdocs—deseos navideños vibrantes dulces de_a02258458f.jpg');">
             <div class="slide-content">
-                <h2 class="title" style="color: #333;">Nuestra Lista de Deseos</h2>
-                <p class="subtitle" style="color: #555;">Cosas que quiero hacer contigo algún día.</p>
+                <h2 class="title" style="color: #333;">Lista de tus Deseos</h2>
+                <p class="subtitle" style="color: #555;">Cosas que quieres hacer. </p>
                 <ul style="list-style: none; padding: 0; margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
                     <li style="background: rgba(255, 255, 255, 0.9); padding: 15px 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; color: #333;">
-                        <span style="font-size: 1.5em; margin-right: 15px;">✈️</span> Viajar a un lugar exótico que siempre hemos soñado.
+                        <span style="font-size: 1.5em; margin-right: 15px;">✈️</span> Viajar a un lugar asiatico. KOREA
                     </li>
                     <li style="background: rgba(255, 255, 255, 0.9); padding: 15px 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; color: #333;">
-                        <span style="font-size: 1.5em; margin-right: 15px;">🍳</span> Cocinar nuestra cena favorita juntos desde cero.
+                        <span style="font-size: 1.5em; margin-right: 15px;">🍳</span> Cocinar POSTRES.
                     </li>
                     <li style="background: rgba(255, 255, 255, 0.9); padding: 15px 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; color: #333;">
                         <span style="font-size: 1.5em; margin-right: 15px;"> stargazing </span> Tener una noche de observación de estrellas.
-                    </li>
-                    <li style="background: rgba(255, 255, 255, 0.9); padding: 15px 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; align-items: center; color: #333;">
-                        <span style="font-size: 1.5em; margin-right: 15px;">🌳</span> Plantar un árbol juntos.
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="item" style="background-image: url('https://images.unsplash.com/photo-1499571350106-93370327f12e?q=80&w=1974&auto=format&fit=crop');">
-            <div class="slide-content">
-                <h2 class="title" style="color: #333;">¡Faltan para nuestro día especial!</h2>
-                <div id="countdown">
-                    <div><span id="days">00</span><span>Días</span></div>
-                    <div><span id="hours">00</span><span>Horas</span></div>
-                    <div><span id="minutes">00</span><span>Minutos</span></div>
-                    <div><span id="seconds">00</span><span>Segundos</span></div>
-                </div>
-                <p class="subtitle" style="color: #555; margin-top: 30px;">¡Cada segundo cuenta para celebrar nuestro amor!</p>
-            </div>
-        </div>
-
-        <div class="item single-card-slide" style="background-image: url('https://images.unsplash.com/photo-1513151233565-39f20150119b?q=80&w=1974&auto=format&fit=crop');">
-            <a href="https://www.amazon.com/gift-cards/" class="link-card color-7" target="_blank">
+        <div class="item single-card-slide" style="background-image: url('media/SORPRESA.jpg');">
+            <a href="regalo.html" class="link-card color-7" target="_blank">
                 <span class="link-icon">🎁</span>
                 <div class="link-title">Un Pequeño Regalo</div>
                 <div class="link-description">Algo para ti, porque te lo mereces todo y más.</div>
             </a>
         </div>
 
-        <div class="item" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961ed3?q=80&w=2070&auto=format&fit=crop');">
+        <div class="item" style="background-image: url('media/561ff14e93f0761a80080c91ca729508.gif');">
             <div class="personal-message" style="font-size: 2em;">
-                "Tu sonrisa ilumina mis días, tu voz es la melodía que me calma, y tu presencia es el regalo más grande. Gracias por cada momento, por cada risa, por cada abrazo. Eres mi mundo."
+                "Tu sonrisa ilumina mis días, tu voz es la melodía que me calma, y tu presencia es el regalo más grande. Gracias por cada momento, por cada risa, por cada abrazo psicologico. Eres mi mundo."
             </div>
         </div>
 
-        <div class="item single-card-slide" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ba6f60648?q=80&w=2070&auto=format&fit=crop');">
-            <a href="https://www.lonelyplanet.com/best-in-travel" class="link-card color-8" target="_blank">
-                <span class="link-icon">🚀</span>
-                <div class="link-title">Nuestras Futuras Aventuras</div>
-                <div class="link-description">El mundo nos espera, y cada viaje será mejor contigo.</div>
-            </a>
-        </div>
         
-        <div class="item" style="background-image: url('https://images.unsplash.com/photo-1542224562-2245b419365e?q=80&w=1964&auto=format&fit=crop');">
-            <div class="slide-content">
-                <div class="footer">
-                    <p>Este 30 de agosto es solo el comienzo de muchas sorpresas más...</p>
-                    <p style="margin-top: 15px;">Siempre tuyo/a, con amor eterno.</p>
-                    <div class="heart" style="margin-top: 30px;">♥</div>
-                </div>
-            </div>
+        <div class="item">
+    <video autoplay muted loop playsinline class="video-background">
+        <source src="media/wanwan-mobile-legends.1920x1080.mp4" type="video/mp4">
+        Tu navegador no soporta el video.
+    </video>
+    <div class="slide-content">
+        <div class="footer">
+            <p>Este 30 de agosto es solo el comienzo de muchas sorpresas más...</p>
+            <p style="margin-top: 15px;">Siempre estaré ahí para ti.</p>
+            <div class="heart" style="margin-top: 30px;">♥</div>
         </div>
+    </div>
+</div>
     </div>
 
     <div class="navigations">
         <ul class="dots"></ul>
     </div>
 
-    <script src="funciones.js">
-    </script>
+    <script src="funciones.js"></script>
 </body>
 </html>
