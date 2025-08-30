@@ -1045,11 +1045,12 @@
       alert('Pista: el botón mega ✨ crea un momento estrella con fuegos artificiales, confeti y mensaje personalizado.');
     });
 
-       // ===================== FIREWORKS =====================
+    // ===================== FIREWORKS (FUEGOS ARTIFICIALES) =====================
     const fx = document.getElementById('fx');
     const ctx = fx.getContext('2d');
     let W = fx.width = innerWidth,
       H = fx.height = innerHeight;
+
     window.addEventListener('resize', () => {
       W = fx.width = innerWidth;
       H = fx.height = innerHeight;
@@ -1077,28 +1078,22 @@
     }
 
     function loop() {
-      // SIEMPRE limpia el canvas al inicio de cada frame
       ctx.clearRect(0, 0, W, H);
-      
-      ctx.globalCompositeOperation = 'lighter'; // Para un efecto de brillo
+      ctx.globalCompositeOperation = 'lighter';
 
       for (let i = bursts.length - 1; i >= 0; i--) {
-        const ps = bursts[i]; 
+        const ps = bursts[i];
         for (let p = ps.length - 1; p >= 0; p--) {
           const o = ps[p];
-          
           o.x += o.vx;
           o.y += o.vy;
-          o.vy += 0.02; 
+          o.vy += 0.02;
           o.age++;
-
-          const alpha = Math.max(0, 1 - o.age / o.life); 
-          
+          const alpha = Math.max(0, 1 - o.age / o.life);
           ctx.beginPath();
-          ctx.arc(o.x, o.y, 2, 0, Math.PI * 2); 
+          ctx.arc(o.x, o.y, 2, 0, Math.PI * 2);
           ctx.fillStyle = `hsla(${o.hue}, 98%, 60%, ${alpha})`;
           ctx.fill();
-
           if (o.age > o.life) {
             ps.splice(p, 1);
           }
@@ -1112,78 +1107,50 @@
     loop();
 
     let pressTimer;
-    let isPointerDown = false; // Nueva variable para controlar el estado del puntero
-    let lastX, lastY; // Para detectar movimiento significativo
+    let isPointerDown = false;
+    let lastX, lastY;
+    let continuousFireInterval;
 
     window.addEventListener('pointerdown', (e) => {
       isPointerDown = true;
       lastX = e.clientX;
       lastY = e.clientY;
-
-      // Genera un fuego artificial al iniciar el clic/toque
       const hue = Math.floor(Math.random() * 360);
       firework(e.clientX, e.clientY, hue);
-
-      // Inicia el timer para fuegos artificiales continuos si se mantiene presionado
-      // Pero solo si no hay movimiento significativo (para evitar arrastres accidentales)
       pressTimer = setTimeout(() => {
-          if (isPointerDown) { // Solo si aún está presionado
-              // console.log("Starting continuous fireworks"); // Debug
-              const continuousFire = setInterval(() => {
-                  if (isPointerDown) {
-                    firework(lastX + (Math.random() * 60 - 30), lastY + (Math.random() * 60 - 30), Math.floor(Math.random() * 360));
-                  } else {
-                    clearInterval(continuousFire);
-                  }
-              }, 150); // Genera fuegos artificiales cada 150ms mientras se mantiene presionado
-          }
-      }, 400); // Espera 400ms antes de iniciar la ráfaga continua
+        if (isPointerDown) {
+          continuousFireInterval = setInterval(() => {
+            firework(lastX + (Math.random() * 60 - 30), lastY + (Math.random() * 60 - 30), Math.floor(Math.random() * 360));
+          }, 150);
+        }
+      }, 400);
     });
 
     window.addEventListener('pointermove', (e) => {
-        if (isPointerDown) {
-            lastX = e.clientX;
-            lastY = e.clientY;
-            // No generamos fuegos artificiales directamente en pointermove,
-            // sino que actualizamos la posición para el pressTimer.
-        }
+      if (isPointerDown) {
+        lastX = e.clientX;
+        lastY = e.clientY;
+      }
     });
 
     window.addEventListener('pointerup', () => {
       isPointerDown = false;
-      clearTimeout(pressTimer); // Detiene el timer de inicio
-      // Cualquier `setInterval` iniciado por `pressTimer` será detenido por `isPointerDown` = false
+      clearTimeout(pressTimer);
+      clearInterval(continuousFireInterval);
     });
-
+    
     // ===================== HUELLA CURSOR =====================
     const paws = ['🐾', '🐾', '🐾', '💖'];
     let pawIdx = 0;
     window.addEventListener('pointermove', (e) => {
-      // Reduce drásticamente la frecuencia de aparición de las huellas para evitar acumulación visual
-      if (Math.random() < 0.03) { // Reducido a 3% de probabilidad
+      if (Math.random() < 0.03) {
         const p = document.createElement('div');
         p.className = 'paw';
         p.textContent = paws[pawIdx++ % paws.length];
         p.style.left = (e.clientX + (Math.random() * 12 - 6)) + 'px';
         p.style.top = (e.clientY + (Math.random() * 12 - 4)) + 'px';
         p.style.transform = `scale(${.7 + Math.random() * 0.6}) rotate(${Math.random() * 40 - 20}deg)`;
-        p.style.opacity = .5; // Hazlas un poco más transparentes
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 900);
-      }
-    });
-
-    // ===================== HUELLA CURSOR =====================
-    const paws = ['🐾', '🐾', '🐾', '💖'];
-    let pawIdx = 0;
-    window.addEventListener('pointermove', (e) => {
-      if (Math.random() < 0.12) {
-        const p = document.createElement('div');
-        p.className = 'paw';
-        p.textContent = paws[pawIdx++ % paws.length];
-        p.style.left = (e.clientX + (Math.random() * 12 - 6)) + 'px';
-        p.style.top = (e.clientY + (Math.random() * 12 - 4)) + 'px';
-        p.style.transform = `scale(${.7 + Math.random() * 0.6}) rotate(${Math.random() * 40 - 20}deg)`;
+        p.style.opacity = .5;
         document.body.appendChild(p);
         setTimeout(() => p.remove(), 900);
       }
