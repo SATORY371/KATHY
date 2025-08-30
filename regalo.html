@@ -54,6 +54,7 @@
       /* Fondo con degradado radial sutil */
       background: radial-gradient(1200px 1200px at 80% -10%, rgba(126, 231, 135, .08), transparent),
                   radial-gradient(1000px 800px at 10% 10%, rgba(167, 139, 250, .08), transparent),
+                  radial-gradient(900px 900px at -10% 80%, rgba(255, 184, 107, .06), transparent),
                   var(--bg);
       color: var(--txt);
       font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
@@ -881,8 +882,10 @@
       el.addEventListener('pointerleave', () => {
         el.style.boxShadow = 'none'
       })
-      el.addEventListener('click', () => {
+      el.addEventListener('click', (e) => {
         spark(el);
+        const rect = e.target.getBoundingClientRect();
+        firework(rect.left + rect.width / 2, rect.top + rect.height / 2, Math.floor(Math.random() * 360));
       })
     });
 
