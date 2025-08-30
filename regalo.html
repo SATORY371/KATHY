@@ -503,23 +503,33 @@
     }
     
     /* MEJORAS DE DISEÑO RESPONSIVO (MOBILE FIRST) */
+    .cols-3 {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
     .hero-content {
       flex-direction: column;
+      align-items: center;
     }
-
+    
     .hero-right {
       order: -1;
     }
 
     @media (min-width: 768px) {
+      .cols-3 {
+        flex-direction: row;
+      }
       .hero-content {
         flex-direction: row;
       }
-
       .hero-right {
         order: 0;
       }
     }
+    
     @media (max-width: 500px) {
       .cd-box {
         min-width: 60px;
@@ -536,6 +546,9 @@
       }
       .note p {
         font-size: 0.9em;
+      }
+      .gallery .img {
+        flex: 1 1 100%;
       }
     }
   </style>
