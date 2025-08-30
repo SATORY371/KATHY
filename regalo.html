@@ -611,7 +611,7 @@
       </article>
       <article class="card">
         <h2>🎁 Sorpresa</h2>
-        <p>Haz clic en cualquier parte de la pantalla para ver fuegos artificiales. Mantén presionado para una lluvia de estrellas. Y… prueba el botón mágico flotante. 😉</p>
+        <p>Haz clic en el botón flotante "Mega Sorpresa" para una lluvia de estrellas y fuegos artificiales. Es la única forma de activarlos ahora. 😉</p>
         <div class="divider"></div>
         <div class="controls">
           <button id="btnModal" class="btn btn-primary">Abrir tarjeta especial</button>
@@ -1119,39 +1119,6 @@
     }
     loop();
 
-    let pressTimer;
-    let isPointerDown = false;
-    let lastX, lastY;
-    let continuousFireInterval;
-
-    window.addEventListener('pointerdown', (e) => {
-      isPointerDown = true;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      const hue = Math.floor(Math.random() * 360);
-      firework(e.clientX, e.clientY, hue);
-      pressTimer = setTimeout(() => {
-        if (isPointerDown) {
-          continuousFireInterval = setInterval(() => {
-            firework(lastX + (Math.random() * 60 - 30), lastY + (Math.random() * 60 - 30), Math.floor(Math.random() * 360));
-          }, 150);
-        }
-      }, 400);
-    });
-
-    window.addEventListener('pointermove', (e) => {
-      if (isPointerDown) {
-        lastX = e.clientX;
-        lastY = e.clientY;
-      }
-    });
-
-    window.addEventListener('pointerup', () => {
-      isPointerDown = false;
-      clearTimeout(pressTimer);
-      clearInterval(continuousFireInterval);
-    });
-    
     // ===================== HUELLA CURSOR =====================
     const paws = ['🐾', '🐾', '🐾', '💖'];
     let pawIdx = 0;
@@ -1170,27 +1137,37 @@
     });
 
     // ===================== MEGA SORPRESA =====================
-    $('#btnMega').addEventListener('click', () => {
-      const n = nombreSpans[0].textContent || 'Doctora';
-      for (let i = 0; i < 3; i++) setTimeout(() => confeti('var(--accent-3)', 'var(--love)'), i * 300);
-      for (let i = 0; i < 5; i++) setTimeout(() => firework(Math.random() * W, Math.random() * H * 0.7 + H * 0.1, Math.floor(Math.random() * 360)), 200 + i * 200);
+    const btnMega = $('#btnMega');
+    let continuousFireInterval;
 
-      const banner = document.createElement('div');
-      banner.style.position = 'fixed';
-      banner.style.left = '50%';
-      banner.style.top = '10%';
-      banner.style.transform = 'translateX(-50%)';
-      banner.style.background = 'linear-gradient(90deg, var(--accent), var(--accent-2))';
-      banner.style.color = '#0b1220';
-      banner.style.padding = '14px 18px';
-      banner.style.borderRadius = '14px';
-      banner.style.fontWeight = '800';
-      banner.style.zIndex = 55;
-      banner.style.boxShadow = '0 12px 28px rgba(0,0,0,.35)';
-      banner.textContent = `¡Feliz cumpleaños, ${n}! ✨`;
-      document.body.appendChild(banner);
-      setTimeout(() => banner.remove(), 2400);
+    btnMega.addEventListener('pointerdown', (e) => {
+      const n = nombreSpans[0].textContent || 'Doctora';
+      // Lanzar un fuego artificial al instante
+      firework(e.clientX, e.clientY, Math.floor(Math.random() * 360));
+
+      // Lanzar más fuegos artificiales y confeti después de un breve retraso
+      setTimeout(() => {
+        for (let i = 0; i < 3; i++) setTimeout(() => confeti('var(--accent-3)', 'var(--love)'), i * 300);
+        for (let i = 0; i < 5; i++) setTimeout(() => firework(Math.random() * W, Math.random() * H * 0.7 + H * 0.1, Math.floor(Math.random() * 360)), 200 + i * 200);
+
+        const banner = document.createElement('div');
+        banner.style.position = 'fixed';
+        banner.style.left = '50%';
+        banner.style.top = '10%';
+        banner.style.transform = 'translateX(-50%)';
+        banner.style.background = 'linear-gradient(90deg, var(--accent), var(--accent-2))';
+        banner.style.color = '#0b1220';
+        banner.style.padding = '14px 18px';
+        banner.style.borderRadius = '14px';
+        banner.style.fontWeight = '800';
+        banner.style.zIndex = 55;
+        banner.style.boxShadow = '0 12px 28px rgba(0,0,0,.35)';
+        banner.textContent = `¡Feliz cumpleaños, ${n}! ✨`;
+        document.body.appendChild(banner);
+        setTimeout(() => banner.remove(), 2400);
+      }, 100); // Pequeño retraso para que el primer fuego se vea bien
     });
+
   </script>
 </body>
 </html>
