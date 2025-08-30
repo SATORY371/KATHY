@@ -1076,28 +1076,41 @@
       bursts.push(particles);
     }
 
-    function loop() {
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.fillStyle = 'rgba(0,0,0,0.25)';
-      ctx.fillRect(0, 0, W, H);
-      ctx.globalCompositeOperation = 'lighter';
+        function loop() {
+      // **CAMBIO CLAVE AQUÍ:** Limpia el canvas completamente en cada frame
+      ctx.clearRect(0, 0, W, H); 
+      // Si quieres un rastro sutil, puedes añadir un fondo semi-transparente
+      // ctx.fillStyle = 'rgba(0,0,0,0.08)'; // Ajusta la opacidad para el efecto de rastro
+      // ctx.fillRect(0, 0, W, H);
+      
+      ctx.globalCompositeOperation = 'lighter'; // Para un efecto de brillo
 
       for (let i = bursts.length - 1; i >= 0; i--) {
-        const ps = bursts[i];
+        const ps = bursts[i]; // Partículas de un solo fuego artificial
         for (let p = ps.length - 1; p >= 0; p--) {
-          const o = ps[p];
+          const o = ps[p]; // Partícula individual
+          
           o.x += o.vx;
           o.y += o.vy;
-          o.vy += 0.02;
+          o.vy += 0.02; // Gravedad
           o.age++;
-          const alpha = Math.max(0, 1 - o.age / o.life);
+
+          const alpha = Math.max(0, 1 - o.age / o.life); // Desvanecimiento
+          
           ctx.beginPath();
-          ctx.arc(o.x, o.y, 2, 0, Math.PI * 2);
+          ctx.arc(o.x, o.y, 2, 0, Math.PI * 2); // Dibuja la partícula
           ctx.fillStyle = `hsla(${o.hue}, 98%, 60%, ${alpha})`;
           ctx.fill();
-          if (o.age > o.life) ps.splice(p, 1);
+
+          // Elimina la partícula si ha excedido su vida útil
+          if (o.age > o.life) {
+            ps.splice(p, 1);
+          }
         }
-        if (ps.length === 0) bursts.splice(i, 1);
+        // Elimina el fuego artificial completo si ya no tiene partículas
+        if (ps.length === 0) {
+          bursts.splice(i, 1);
+        }
       }
       requestAnimationFrame(loop);
     }
