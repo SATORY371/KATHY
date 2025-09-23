@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const lockScreen = document.getElementById('lock-screen');
 
 // Formato: "Mes Dia, Año HH:MM:SS" -> "Aug 30, 2025 00:00:00"
-const targetDate = new Date("Aug 30, 2026 00:00:00").getTime();
+const targetDate = new Date("Aug 30, 2025 00:00:00").getTime();
 
 
 function updateCountdown() {
@@ -126,3 +126,4 @@ let countdownInterval = setInterval(updateCountdown, 1000);
 // Llama una vez inmediatamente para que no haya un segundo de retraso al cargar la página
 
 updateCountdown();
+
