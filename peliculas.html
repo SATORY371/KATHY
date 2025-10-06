@@ -4,15 +4,208 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería de Cine y TV</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables para colores */
+        :root {
+            --bg-color-light: #f0f2f5;
+            --text-color-light: #333;
+            --primary-color-light: #5a77c3;
+            --secondary-color-light: #ffffff;
+            --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --star-filled-color: #ffc107;
+            --star-empty-color: #d1d1d1;
+        }
+
+        /* Tema oscuro */
+        body.dark-mode {
+            --bg-color-light: #121212;
+            --text-color-light: #e0e0e0;
+            --primary-color-light: #6a89c9;
+            --secondary-color-light: #1f1f1f;
+            --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.5);
+            --star-empty-color: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--secondary-color-light);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color-light);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color-light);
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        section {
+            margin-bottom: 50px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color-light);
+            border-bottom: 3px solid var(--primary-color-light);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .galeria-item {
+            background-color: var(--secondary-color-light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow-light);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .galeria-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .galeria-item .image-link {
+            display: block;
+            overflow: hidden;
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .item-info {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .item-info h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color-light);
+        }
+
+        .rating-display {
+            font-size: 1.3rem;
+            margin-top: auto; /* Empuja las estrellas al final */
+        }
+        
+        .rating-display .star.filled {
+            color: var(--star-filled-color);
+        }
+        
+        .rating-display .star.empty {
+            color: var(--star-empty-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--secondary-color-light);
+            margin-top: 20px;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer p a {
+            color: var(--primary-color-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer p a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
     <header>
-        <h1>Galeria que nos entretubo</h1>
+        <h1>Galería de Medios</h1>
         <nav>
             <ul>
                 <li><a href="#animes">Animes</a></li>
@@ -27,64 +220,185 @@
         <section id="animes">
             <h2>Animes</h2>
             <div class="galeria">
-                <a href="https://ww3.animeonline.ninja/online/peach-girl/" target="_blank">
-                    <img src="media/2e20683602949e6bcffafa6a44e5e832.jpg" alt="Imagen de One Piece">
-                </a>
-                <a href="https://ww3.animeonline.ninja/online/darling-in-the-franxx-121024/" target="_blank">
-                    <img src="media/DARLING_in_the_FRANXX_.webp" alt="Imagen de Jujutsu Kaisen">
-                </a>
-                <a href="https://ww3.animeonline.ninja/online/kobayashi-san-chi-no-maid-dragon-2/" target="_blank">
-                    <img src="media/Kobayashi-san_Chi_no_Maid_Dragon_29.webp" alt="Imagen de Jujutsu Kaisen">
-                </a>
+                <!-- Para cambiar la puntuación, edita las clases 'filled' o 'empty' -->
+                <div class="galeria-item">
+                    <a href="https://ww3.animeonline.ninja/online/peach-girl/" target="_blank" class="image-link">
+                        <img src="media/2e20683602949e6bcffafa6a44e5e832.jpg" alt="Peach Girl">
+                    </a>
+                    <div class="item-info">
+                        <h3>Peach Girl</h3>
+                        <div class="rating-display">
+                            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <a href="https://ww3.animeonline.ninja/online/darling-in-the-franxx-121024/" target="_blank" class="image-link">
+                        <img src="media/DARLING_in_the_FRANXX_.webp" alt="Darling in the Franxx">
+                    </a>
+                    <div class="item-info">
+                        <h3>Darling in the Franxx</h3>
+                        <div class="rating-display">
+                            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <a href="https://ww3.animeonline.ninja/online/kobayashi-san-chi-no-maid-dragon-2/" target="_blank" class="image-link">
+                        <img src="media/Kobayashi-san_Chi_no_Maid_Dragon_29.webp" alt="Kobayashi-san">
+                    </a>
+                     <div class="item-info">
+                        <h3>Kobayashi-san's Dragon Maid</h3>
+                        <div class="rating-display">
+                            <span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="peliculas">
             <h2>Películas</h2>
             <div class="galeria">
-                <a href="https://ww3.animeonline.ninja/pelicula/koe-no-katachi-070125/" target="_blank">
-                    <img src="media/a-silent-voice.jpg" alt="Imagen de Dune">
-                </a>
-                <a href="https://ww3.animeonline.ninja/pelicula/kimi-no-na-wa-your-name-091324/" target="_blank">
-                    <img src="media/MV5BMTIyNzFjNzItZmQ1MC00NzhjLThmMzYtZjRhN2Y3MmM2OGQyXkEyXkFqcGc@._V1_.jpg" alt="Imagen de El Señor de los Anillos">
-                </a>
-                <a href="https://ww3.animeonline.ninja/pelicula/tenki-no-ko-weathering-with-you-4/" target="_blank">
-                    <img src="media/MV5BN2Q3Y2VhMGQtODRlZS00MzI0LThhYTAtMDE5ZTQwMjQ5NTQ2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Imagen de Barbie">
-                </a>
+                <div class="galeria-item">
+                    <a href="https://ww3.animeonline.ninja/pelicula/koe-no-katachi-070125/" target="_blank" class="image-link">
+                        <img src="media/a-silent-voice.jpg" alt="A Silent Voice">
+                    </a>
+                    <div class="item-info">
+                        <h3>A Silent Voice</h3>
+                        <div class="rating-display">
+                             <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="galeria-item">
+                    <a href="https://ww3.animeonline.ninja/pelicula/kimi-no-na-wa-your-name-091324/" target="_blank" class="image-link">
+                        <img src="media/MV5BMTIyNzFjNzItZmQ1MC00NzhjLThmMzYtZjRhN2Y3MmM2OGQyXkEyXkFqcGc@._V1_.jpg" alt="Your Name">
+                    </a>
+                    <div class="item-info">
+                        <h3>Your Name</h3>
+                        <div class="rating-display">
+                            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="galeria-item">
+                    <a href="https://ww3.animeonline.ninja/pelicula/tenki-no-ko-weathering-with-you-4/" target="_blank" class="image-link">
+                        <img src="media/MV5BN2Q3Y2VhMGQtODRlZS00MzI0LThhYTAtMDE5ZTQwMjQ5NTQ2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Weathering with You">
+                    </a>
+                    <div class="item-info">
+                        <h3>Weathering with You</h3>
+                        <div class="rating-display">
+                           <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="doramas">
             <h2>Doramas</h2>
             <div class="galeria">
-                <a href="https://pandrama.com/episodio/me-llamo-kim-sam-soon-mi-adorable-sam-soon-lat-capitulo-1/op-1/" target="_blank">
-                    <img src="media/pcCmzOSn2vfbo6gmGc4n5X4KMTj.jpg" alt="Imagen de The Glory">
-                </a>
-                <a href="https://doramashd.com/766/Pan-Amor-y-Sueos-Capitulo-1/"> 
-                    <img src="media/pan amor y suños.jpg" alt="Imagen de The Glory">
-                </a>
-                <a href="https://doramashd.com/Cunning-Single-Lady/295/" target="_blank">
-                    <img src="media/single lady.jpg" alt="Imagen de The Glory">
-                </a>
-                <a href="https://pandrama.io/doramas/start-up" target="_blank">
-                    <img src="media/hq55ekoWj3zHfBM8RoyxYcw64l3.webp" alt="Imagen de Kingdom">
-                </a>
-                <a href="https://pandrama.com/episodio/goblin-audio-latino-capitulo-2/op-3/" target="_blank">
-                    <img src="media/goblin-el-solitario-ser-inmortal.jpg" alt="Imagen de Boys Over Flowers">
-                </a>
+                 <div class="galeria-item">
+                    <a href="https://pandrama.com/episodio/me-llamo-kim-sam-soon-mi-adorable-sam-soon-lat-capitulo-1/op-1/" target="_blank" class="image-link">
+                        <img src="media/pcCmzOSn2vfbo6gmGc4n5X4KMTj.jpg" alt="Mi Adorable Sam Soon">
+                    </a>
+                    <div class="item-info">
+                        <h3>Mi Adorable Sam Soon</h3>
+                        <div class="rating-display">
+                            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">☆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <a href="https://doramashd.com/766/Pan-Amor-y-Sueos-Capitulo-1/" target="_blank" class="image-link"> 
+                        <img src="media/pan amor y suños.jpg" alt="Pan, Amor y Sueños">
+                    </a>
+                    <div class="item-info">
+                        <h3>Pan, Amor y Sueños</h3>
+                        <div class="rating-display">
+                           <span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <a href="https://doramashd.com/Cunning-Single-Lady/295/" target="_blank" class="image-link">
+                        <img src="media/single lady.jpg" alt="Cunning Single Lady">
+                    </a>
+                    <div class="item-info">
+                        <h3>Cunning Single Lady</h3>
+                        <div class="rating-display">
+                            <span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                     <a href="https://pandrama.io/doramas/start-up" target="_blank" class="image-link">
+                        <img src="media/hq55ekoWj3zHfBM8RoyxYcw64l3.webp" alt="Start-Up">
+                    </a>
+                    <div class="item-info">
+                        <h3>Start-Up</h3>
+                        <div class="rating-display">
+                           <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="galeria-item">
+                    <a href="https://pandrama.com/episodio/goblin-audio-latino-capitulo-2/op-3/" target="_blank" class="image-link">
+                        <img src="media/goblin-el-solitario-ser-inmortal.jpg" alt="Goblin">
+                    </a>
+                    <div class="item-info">
+                        <h3>Goblin</h3>
+                        <div class="rating-display">
+                            <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 GALERY. Todos los derechos reservados. <a href="https://satory371.github.io/Satory_web/" style="color: aqua;">SATORY</a></p>
+        <p>&copy; 2025 GALERY. Todos los derechos reservados. Creado por <a href="https://satory371.github.io/Satory_web/">SATORY</a></p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            // Función para aplicar el tema guardado
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    body.classList.add('dark-mode');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    body.classList.remove('dark-mode');
+                    themeToggle.textContent = '🌙';
+                }
+            };
+
+            // Cargar el tema guardado en localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            }
+
+            // Event listener para el botón de cambio de tema
+            themeToggle.addEventListener('click', () => {
+                const isDarkMode = body.classList.toggle('dark-mode');
+                
+                // Guardar la preferencia del usuario
+                if (isDarkMode) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌙';
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
-
-
-
 
