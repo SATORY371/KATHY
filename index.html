@@ -8,27 +8,151 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&family=Georgia:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilo.css">
-</head>
-<style>
-    .video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1; /* Lo envía al fondo, detrás del resto del contenido */
-}
+    
+    <style>
+        /* ESTILOS EXISTENTES */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .item {
+            position: relative;
+            overflow: hidden;
+        }
 
-/* El contenedor principal debe ser relativo para que el video se posicione correctamente */
-.item {
-    position: relative;
-    overflow: hidden;
-    /* Añade aquí las dimensiones que desees para tu contenedor */
-}
-</style>
+        /* --- NUEVOS ESTILOS PARA LA VENTANA DE BLOQUEO (PRANK) --- */
+        #bloqueo-sistema {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 99999; /* Asegura que esté encima de TODO */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ff3333; /* Rojo alarma */
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding: 20px;
+            transition: background-color 0.5s ease;
+        }
+
+        #contenido-alerta h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            border: 2px solid #ff3333;
+            padding: 15px;
+            margin-bottom: 20px;
+            animation: parpadeo 1.5s infinite;
+        }
+
+        #mensaje-eliminacion {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        #cuenta-regresiva-final {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Estilo para el mensaje de error falso */
+        #pantalla-error {
+            display: none; /* Oculto por defecto */
+            text-align: left;
+            max-width: 600px;
+            color: #333;
+        }
+
+        /* Animación de parpadeo para la alerta */
+        @keyframes parpadeo {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Clase que se añade cuando ocurre el "error" */
+        .modo-error {
+            background-color: #ffffff !important; /* Fondo blanco de error de navegador */
+            color: #000 !important;
+            font-family: Arial, sans-serif !important;
+        }
+    </style>
+</head>
 <body>
 
+    <div id="bloqueo-sistema">
+        
+        <div id="contenido-alerta">
+            <h1>⚠️ ALERTA DEL SISTEMA ⚠️</h1>
+            <p id="mensaje-eliminacion">
+                Este sitio web se eliminará por completo el <br>
+                <span style="color: #ff3333; font-weight: bold;">26/11/2025 a las 12:00 PM</span>
+            </p>
+            <div id="cuenta-regresiva-final">
+                Calculando...
+            </div>
+        </div>
+
+        <div id="pantalla-error">
+            <h2 style="font-size: 24px; color: #5f6368; margin-bottom: 20px;">No se puede acceder a este sitio</h2>
+            <p style="font-size: 16px; color: #5f6368; margin-bottom: 10px;">
+                <strong>localhost</strong> ha rechazado la conexión.
+            </p>
+            <p style="font-size: 14px; color: #5f6368;">Prueba a:</p>
+            <ul style="font-size: 14px; color: #5f6368; margin-left: 20px;">
+                <li>Comprobar la conexión</li>
+                <li>Comprobar el proxy y el cortafuegos</li>
+            </ul>
+            <br>
+            <p style="color: #777; font-size: 12px;">ERR_CONNECTION_REFUSED</p>
+            <h1 style="color:red; margin-top:20px; font-size: 30px;">ERROR DE COMUNICACIÓN CON EL SERVIDOR</h1>
+        </div>
+    </div>
+
+    <script>
+        // Fecha objetivo: 26 de Noviembre de 2025 a las 12:00:00
+        const fechaEliminacion = new Date('November 26, 2025 12:00:00').getTime();
+
+        const intervaloBloqueo = setInterval(function() {
+            const ahora = new Date().getTime();
+            const distancia = fechaEliminacion - ahora;
+
+            // Cálculos de tiempo
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            // Mostrar el resultado
+            document.getElementById("cuenta-regresiva-final").innerHTML = 
+                dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+
+            // Si la cuenta termina
+            if (distancia < 0) {
+                clearInterval(intervaloBloqueo);
+                
+                // 1. Ocultar la alerta de cuenta regresiva
+                document.getElementById("contenido-alerta").style.display = "none";
+                
+                // 2. Cambiar el estilo del fondo a blanco (parecido a Chrome/Edge error)
+                document.getElementById("bloqueo-sistema").classList.add("modo-error");
+                
+                // 3. Mostrar el mensaje de error falso
+                document.getElementById("pantalla-error").style.display = "block";
+            }
+        }, 1000);
+    </script>
     <div class="item" id="lock-screen" style="background-image: url('https://images.unsplash.com/photo-1499571350106-93370327f12e?q=80&w=1974&auto=format&fit=crop');">
         <div class="slide-content">
             <h2 class="title" style="color: #333;">¡Una sorpresa te espera!</h2>
@@ -62,7 +186,7 @@
                 <div class="link-description">La melodía que siempre me recuerda a ti, con cada nota un recuerdo. <strong>CLICK AQUI</strong></div>
             </a>
         </div>
-        
+       
         <div class="item single-card-slide" style="background-image: url('media/granger-alluring-enigma-silvanna-alluring-mystique-mlbb-hd-wallpaper-uhdpaper.com-434@3@b.jpg');">
             <a href="faborito.html" class="link-card color-2" target="_blank">
                 <span class="link-icon">🎮</span>
@@ -131,20 +255,20 @@
             </div>
         </div>
 
-        
+       
         <div class="item">
-    <video autoplay muted loop playsinline class="video-background">
-        <source src="media/wanwan-mobile-legends.1920x1080.mp4" type="video/mp4">
-        Tu navegador no soporta el video.
-    </video>
-    <div class="slide-content">
-        <div class="footer">
-            <p>Este 30 de agosto es solo el comienzo de muchas sorpresas más...</p>
-            <p style="margin-top: 15px;">Siempre estaré ahí para ti.</p>
-            <div class="heart" style="margin-top: 30px;">♥</div>
+            <video autoplay muted loop playsinline class="video-background">
+                <source src="media/wanwan-mobile-legends.1920x1080.mp4" type="video/mp4">
+                Tu navegador no soporta el video.
+            </video>
+            <div class="slide-content">
+                <div class="footer">
+                    <p>Este 30 de agosto es solo el comienzo de muchas sorpresas más...</p>
+                    <p style="margin-top: 15px;">Siempre estaré ahí para ti.</p>
+                    <div class="heart" style="margin-top: 30px;">♥</div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 
     <div class="navigations">
