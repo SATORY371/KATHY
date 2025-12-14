@@ -443,3 +443,28 @@ body {
     visibility: hidden; /* Oculta el elemento y lo hace no-interactuable */
     pointer-events: none; /* Desactiva cualquier evento de mouse/táctil */
 }
+
+/* Christmas Lock Screen Specifics */
+#lock-screen {
+    /* Blur effect for the content behind */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.6) !important; /* Dark semi-transparent overlay */
+    text-align: center;
+}
+
+#lock-screen .title {
+    font-size: 3em;
+    color: var(--color-red) !important;
+    margin-bottom: 20px;
+}
+
+#lock-screen .poetic-text {
+    font-family: var(--font-body);
+    font-size: 1.5em;
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-style: italic;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}

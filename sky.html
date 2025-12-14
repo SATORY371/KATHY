@@ -3,159 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error 404 - Página No Encontrada</title>
-    <style>
-        /*
-         * Estilos para una página 404 moderna y llamativa
-         */
-
-        /* 1. Reset Básico y Variables */
-        :root {
-            --main-bg-color: #1a1a2e; /* Azul oscuro elegante */
-            --accent-color: #ff5722; /* Naranja/rojo vibrante para contraste */
-            --text-color: #e5e5e5; /* Texto claro */
-            --card-bg-color: #2e2e4f; /* Fondo de la tarjeta un poco más claro */
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* 2. Estilo del Cuerpo y Contenedor */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--main-bg-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 600px;
-        }
-
-        /* 3. Contenido del Error (Tarjeta) */
-        .error-content {
-            background-color: var(--card-bg-color);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 1s ease-out; /* Animación de entrada */
-        }
-
-        /* 4. Código del Error (404) */
-        .error-code {
-            font-size: 10rem; /* Muy grande */
-            font-weight: 900;
-            color: var(--accent-color);
-            line-height: 1;
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(255, 87, 34, 0.7); /* Sombra brillante */
-            letter-spacing: 10px;
-            animation: pulse 2s infinite alternate; /* Animación llamativa */
-        }
-
-        /* 5. Títulos y Párrafos */
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .error-message {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .tech-info {
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* 6. Botones de Acción */
-        .action-buttons a {
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            display: inline-block;
-            margin: 0 10px;
-        }
-
-        .primary-btn {
-            background-color: var(--accent-color);
-            color: #fff;
-            border: 2px solid var(--accent-color);
-        }
-
-        .primary-btn:hover {
-            background-color: #e64a19;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.5);
-        }
-
-        .secondary-btn {
-            background-color: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--text-color);
-        }
-
-        .secondary-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* 7. Animaciones */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.03);
-            }
-        }
-    </style>
+    <title>Un Cielo Lleno de Estrellas para Ti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="flori.css">
+    
 </head>
 <body>
-    <div class="container">
-        <div class="error-content">
-            <div class="error-code">404</div>
-            <h1>¡Página No Encontrada!</h1>
-            <p class="error-message">
-                **Esta página no se cargó ya que no la hemos encontrado.**
-                <br>
-                **Opciones:** Desactive el cortafuegos o verifique la ruta URL.
-            </p>
-            <div class="action-buttons">
-                <a href="/" class="btn primary-btn">Ir a la página de inicio</a>
-                <a href="javascript:history.back()" class="btn secondary-btn">Volver a la página anterior</a>
+    <canvas id="main-canvas"></canvas>
+    <div id="effects-field"></div>
+    <div id="ui-container">
+        <div id="loading-screen" class="ui-screen">
+            <p>Cargando la experiencia...</p>
+        </div>
+        <div id="initial-screen" class="ui-screen hidden">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4" style="font-family: 'Dancing Script', cursive; text-shadow: 0 0 10px #fff;">¡Feliz Cumpleaños!</h1>
+            <p class="text-lg md:text-2xl mb-8">Para esa persona que brilla más que cualquier estrella.</p>
+            <div>
+                <button id="start-es" class="lang-button">Ver en Español</button>
+                <button id="start-en" class="lang-button"><a href="ingles.html">Ver en English</a></button>
             </div>
-            <p class="tech-info">
-                *Si el problema persiste, contacte al soporte técnico.*
-            </p>
+        </div>
+         <div id="replay-screen" class="ui-screen hidden">
+            <h2 class="text-2xl md:text-4xl mb-6">¿Otra vez?</h2>
+            <button id="replay-button" class="lang-button">Repetir la magia</button>
         </div>
     </div>
+    <div id="lyrics-container"></div>
+
+    <div id="volume-control-container">
+        <span class="volume-icon">🔊</span>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1">
+    </div>
+
+    <script src="sistema.js"></script>
 </body>
 </html>

@@ -6,9 +6,9 @@ function createSparkle() {
     sparkle.style.top = Math.random() * 100 + 'vh';
     sparkle.innerHTML = '✨';
     sparkle.style.fontSize = Math.random() * 20 + 10 + 'px';
-    
+
     document.body.appendChild(sparkle);
-    
+
     setTimeout(() => {
         sparkle.remove();
     }, 3000);
@@ -16,13 +16,36 @@ function createSparkle() {
 // Solo crear destellos si la pantalla no está bloqueada
 let sparkleInterval;
 
+// --- DYNAMIC SNOWFALL ---
+function createSnowflakes() {
+    const snowContainer = document.body;
+    const snowflakeCount = 50; // Number of snowflakes
+
+    for (let i = 0; i < snowflakeCount; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+
+        // Random positioning and animation properties
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem'; // 0.5rem to 2rem
+        snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5s to 10s
+        snowflake.style.animationDelay = (Math.random() * 5) + 's';
+        snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+
+        snowContainer.appendChild(snowflake);
+    }
+}
+document.addEventListener('DOMContentLoaded', createSnowflakes);
+
+
 
 // --- Lógica para los Puntos de Navegación (Dots) y Scroll Snap ---
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const scrollContainer = document.querySelector('.horizontal-scroll-container');
     const sliderItems = document.querySelectorAll('.horizontal-scroll-container .item');
     const dotsContainer = document.querySelector('.navigations .dots');
-    
+
     if (!scrollContainer || !sliderItems.length || !dotsContainer) return;
 
     sliderItems.forEach((_, index) => {
@@ -81,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const lockScreen = document.getElementById('lock-screen');
 
 // Formato: "Mes Dia, Año HH:MM:SS" -> "Aug 30, 2025 00:00:00"
-const targetDate = new Date("Aug 30, 2025 00:00:00").getTime();
+const targetDate = new Date("Dec 24, 2025 07:00:00").getTime();
 
 
 function updateCountdown() {
@@ -91,9 +114,9 @@ function updateCountdown() {
     // Si el tiempo ha terminado
     if (distance < 0) {
         clearInterval(countdownInterval);
-        
+
         // Oculta la pantalla de bloqueo
-        if(lockScreen) {
+        if (lockScreen) {
             lockScreen.classList.add('unlocked');
         }
 
@@ -101,13 +124,13 @@ function updateCountdown() {
         if (!sparkleInterval) {
             sparkleInterval = setInterval(createSparkle, 1500);
         }
-        
+
         // Opcional: Actualiza el contador a cero por si acaso.
         document.getElementById("days").innerText = "00";
         document.getElementById("hours").innerText = "00";
         document.getElementById("minutes").innerText = "00";
         document.getElementById("seconds").innerText = "00";
-        return; 
+        return;
     }
 
     // Si el tiempo aún no ha terminado
@@ -124,6 +147,34 @@ function updateCountdown() {
 
 let countdownInterval = setInterval(updateCountdown, 1000);
 // Llama una vez inmediatamente para que no haya un segundo de retraso al cargar la página
-
 updateCountdown();
 
+// --- Background Music Control ---
+document.addEventListener('DOMContentLoaded', function () {
+    const bgMusic = document.getElementById('bg-music');
+    const musicControl = document.getElementById('music-control');
+
+    // Only proceed if elements exist
+    if (bgMusic && musicControl) {
+        const musicIcon = musicControl.querySelector('span');
+        bgMusic.volume = 0.1; // Set volume to 10%
+
+        // Try to play automatically
+        bgMusic.play().then(() => {
+            musicIcon.textContent = '🔊';
+        }).catch(error => {
+            console.log("Autoplay prevented:", error);
+            musicIcon.textContent = '🔇';
+        });
+
+        musicControl.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicIcon.textContent = '🔊';
+            } else {
+                bgMusic.pause();
+                musicIcon.textContent = '🔇';
+            }
+        });
+    }
+});
