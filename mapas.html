@@ -1,188 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flujo de Backend para Creación de Tareas</title>
-    <!-- Carga de Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuración de fuentes y colores personalizados -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'primary-blue': '#1E40AF',
-                        'secondary-green': '#059669',
-                        'gray-light': '#F3F4F6',
-                        'gray-dark': '#1F2937',
-                        'accent-yellow': '#FBBF24',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Sitio Suspendido - GitHub Pages</title>
     <style>
-        /* Estilos personalizados para simular la estructura del ejemplo de Delivery */
-        .flow-card {
-            border-bottom: 2px solid #D1D5DB; /* Línea separadora */
-            padding-bottom: 1.5rem;
-            min-height: 120px; /* Altura mínima para que se vea bien en columnas */
-        }
-        .flow-card:nth-child(even) {
-            border-left: 2px solid #D1D5DB; /* Línea divisoria vertical */
-            padding-left: 1.5rem;
-        }
-
-        /* Estilo para el modal (ventana flotante) */
-        .modal {
-            display: none; /* Oculto por defecto */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-            backdrop-filter: blur(5px);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: #f6f8fa;
+            color: #24292f;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .logo {
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #cf222e;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #57606a;
+        }
+
+        .warning-box {
+            background-color: #fff8c5;
+            border: 1px solid #d4a72c;
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 20px;
+            color: #bf8700;
+            font-weight: 600;
+        }
+
+        .action-button {
+            display: inline-block;
+            background-color: #2da44e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6e7781;
         }
     </style>
 </head>
-<body class="bg-gray-light font-sans p-4 md:p-8 min-h-screen">
 
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-6 md:p-10">
-
-        <!-- Header y Botón de Autores -->
-        <div class="flex flex-col sm:flex-row justify-between items-center mb-6 border-b pb-4">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-dark text-center sm:text-left mb-2 sm:mb-0">
-                Flujo de Backend: Creación de Tarea (RF2.1)
-            </h1>
-            <button onclick="showModal('authorsModal')" 
-                    class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-md">
-                Ver Autores
-            </button>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- GitHub Logo SVG -->
+            <svg height="48" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="48" data-view-component="true"
+                class="octicon octicon-mark-github">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
         </div>
-        
-        <p class="text-lg text-center text-gray-600 mb-10 pb-4">
-            Veamos qué pasa en la **Gestión de Tareas** cuando creas una nueva tarea.
+        <h1>Servicio Suspendido</h1>
+        <p>
+            Esta página web ha sido deshabilitada de conformidad con nuestras nuevas políticas de mantenimiento de
+            servicio.
+            El colaborador <strong>Satory</strong> ha perdido su estado de verificación con GitHub, lo que impide la
+            continuidad del alojamiento de este sitio.
+        </p>
+        <div class="warning-box">
+            ⚠ URGENTE: Acción Requerida
+        </div>
+        <p style="margin-top: 15px;">
+            El propietario debe comunicarse de inmediato con la entidad responsable o <strong>renovar los contratos de
+                servicio</strong> existentes.
+        </p>
+        <p>
+            <strong>Advertencia:</strong> Si no se regulariza la situación, GitHub eliminará permanentemente esta página
+            y todos sus datos asociados el <strong>sábado 7 de julio</strong>.
         </p>
 
-        <!-- Contenedor principal del flujo, similar al diseño del App de Delivery (2 columnas) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
-
-            <!-- Paso 1: Recepción del pedido -->
-            <div class="flow-card">
-                <p class="text-2xl font-bold text-gray-400 mb-2">01</p>
-                <h2 class="text-xl font-semibold text-primary-blue border-b border-primary-blue pb-1">El Usuario Crea la Tarea</h2>
-                <p class="text-sm mt-2 text-gray-700">El **Frontend** envía la solicitud (datos de la tarea, proyecto y responsable) a la API RESTful.</p>
-                <p class="text-xs italic mt-1 text-gray-500">Analogía: El cliente hace su pedido ("Quiero una pizza").</p>
-            </div>
-
-            <!-- Paso 2: Verificación de cliente (Autenticación) -->
-            <div class="flow-card">
-                <p class="text-2xl font-bold text-gray-400 mb-2">02</p>
-                <h2 class="text-xl font-semibold text-gray-dark border-b border-gray-dark pb-1">Verifica Identidad y Roles (RF1.3)</h2>
-                <p class="text-sm mt-2 text-gray-700">El **Backend Lógico** valida el Token JWT y verifica que el usuario tenga permisos para asignar tareas en ese proyecto.</p>
-                <p class="text-xs italic mt-1 text-gray-500">Analogía: El sistema confirma tu identidad y método de pago.</p>
-            </div>
-
-            <!-- Paso 3: Almacenamiento -->
-            <div class="flow-card">
-                <p class="text-2xl font-bold text-gray-400 mb-2">03</p>
-                <h2 class="text-xl font-semibold text-secondary-green border-b border-secondary-green pb-1">Almacena la Tarea (RF2.1)</h2>
-                <p class="text-sm mt-2 text-gray-700">La **Base de Datos** recibe y ejecuta la operación `INSERT` para crear la nueva entidad 'Tarea', asociándola al proyecto y al responsable.</p>
-                <p class="text-xs italic mt-1 text-gray-500">Analogía: La base de datos verifica y guarda los "ingredientes".</p>
-            </div>
-
-            <!-- Paso 4: Notificación -->
-            <div class="flow-card">
-                <p class="text-2xl font-bold text-gray-400 mb-2">04</p>
-                <h2 class="text-xl font-semibold text-primary-blue border-b border-primary-blue pb-1">Genera Alerta (RF4.2)</h2>
-                <p class="text-sm mt-2 text-gray-700">El **Backend Lógico** activa la lógica de notificaciones para alertar inmediatamente al responsable asignado.</p>
-                <p class="text-xs italic mt-1 text-gray-500">Analogía: Se comunica con la API de pago (aquí, con el sistema de notificaciones).</p>
-            </div>
-
-            <!-- Paso 5: Flujo de Trabajo Inicial -->
-            <div class="flow-card">
-                <p class="text-2xl font-bold text-gray-400 mb-2">05</p>
-                <h2 class="text-xl font-semibold text-gray-dark border-b border-gray-dark pb-1">Asigna Flujo (3.2 Flujo Kanban)</h2>
-                <p class="text-sm mt-2 text-gray-700">La tarea se marca por defecto con el estado **"Por Hacer"**, preparándola para el flujo de trabajo Kanban del equipo.</p>
-                <p class="text-xs italic mt-1 text-gray-500">Analogía: El pedido llega a la cocina para preparar.</p>
-            </div>
-
-            <!-- Paso 6: Respuesta y Actualización de Vistas -->
-            <div class="flow-card">
-                <p class="text-2xl font-bold text-gray-400 mb-2">06</p>
-                <h2 class="text-xl font-semibold text-secondary-green border-b border-secondary-green pb-1">Actualiza el Dashboard (RNF1.1)</h2>
-                <p class="text-sm mt-2 text-gray-700">El servidor envía una respuesta de éxito (HTTP 201) al frontend, que refresca la lista de tareas y el Dashboard.</p>
-                <p class="text-xs italic mt-1 text-gray-500">Analogía: Informas al cliente: "Tu pizza está en camino".</p>
-            </div>
-        </div>
-
-        <div class="mt-8 text-center pt-4 border-t-2 border-gray-200">
-            <p class="text-sm text-gray-600 font-bold">Todo esto pasa en segundos, mientras el usuario solo ve una pantalla de confirmación. ¡Así de poderoso es el backend!</p>
-        </div>
-
-    </div>
-
-    <!-- Modal para Autores -->
-    <div id="authorsModal" class="modal">
-        <div class="bg-white rounded-xl shadow-2xl p-6 w-11/12 md:w-1/3 transform transition-all">
-            <h3 class="text-2xl font-bold text-gray-dark mb-4 border-b pb-2">
-                Autores del Proyecto
-            </h3>
-            <ul class="space-y-2 text-gray-700 text-lg">
-                <li class="flex items-center">
-                    <span class="text-primary-blue mr-2">●</span> Iván Flores Chile
-                </li>
-                <li class="flex items-center">
-                    <span class="text-primary-blue mr-2">●</span> Elvis Vega Quispe
-                </li>
-                <li class="flex items-center">
-                    <span class="text-primary-blue mr-2">●</span> Evaristo Tapia Pacheco
-                </li>
-                <li class="flex items-center">
-                    <span class="text-primary-blue mr-2">●</span> Josuee Abrahan Ttito Macapa
-                </li>
-            </ul>
-            <div class="mt-6 text-right">
-                <button onclick="hideModal('authorsModal')" 
-                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition duration-200">
-                    Cerrar
-                </button>
-            </div>
+        <div class="footer">
+            &copy; 2026 GitHub, Inc. • Terms • Privacy • Status
         </div>
     </div>
-
-    <!-- Script de JavaScript para manejar el Modal -->
-    <script>
-        function showModal(id) {
-            const modal = document.getElementById(id);
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        }
-
-        function hideModal(id) {
-            const modal = document.getElementById(id);
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // Cierra el modal si el usuario hace clic fuera de él
-        window.onclick = function(event) {
-            const modal = document.getElementById('authorsModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 </body>
+
 </html>

@@ -4,832 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Cine y TV</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>Sitio Suspendido - GitHub Pages</title>
     <style>
-        /* Variables para colores */
-        :root {
-            --bg-body: #f4f7fc;
-            --text-main: #2c3e50;
-            --text-secondary: #596b7d;
-            --primary-accent: #6c5ce7;
-            --secondary-accent: #a29bfe;
-            --card-bg: #ffffff;
-            --shadow-soft: 0 10px 20px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 15px 30px rgba(108, 92, 231, 0.2);
-            --gradient-primary: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-            --header-bg: rgba(255, 255, 255, 0.85);
-            --star-color: #fdcb6e;
-            --star-empty: #dfe6e9;
-            --font-display: 'Bebas Neue', cursive;
-            --font-body: 'Poppins', sans-serif;
-        }
-
-        /* Tema oscuro */
-        body.dark-mode {
-            --bg-body: #1a1b26;
-            --text-main: #e2e8f0;
-            --text-secondary: #a0aaec;
-            --primary-accent: #7d5fff;
-            --secondary-accent: #a29bfe;
-            --card-bg: #24253a;
-            --shadow-soft: 0 10px 20px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 15px 30px rgba(125, 95, 255, 0.15);
-            --header-bg: rgba(26, 27, 38, 0.85);
-            --star-empty: #4b4b4b;
-        }
-
         body {
-            font-family: var(--font-body);
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            transition: background-color 0.4s ease, color 0.4s ease;
-            line-height: 1.6;
-        }
-
-        /* Header con efecto Glassmorphism */
-        header {
-            background: var(--header-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        header h1 {
-            margin: 0;
-            font-weight: 500;
-            font-size: 2.2rem;
-            font-family: var(--font-display);
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 1px;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            font-family: var(--font-display);
-            letter-spacing: 0.5px;
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-
-        nav a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::before {
-            width: 100%;
-        }
-
-        nav a:hover {
-            color: var(--primary-accent);
-        }
-
-        #theme-toggle {
-            background: rgba(0, 0, 0, 0.05);
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: var(--text-main);
-            padding: 8px 12px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        body.dark-mode #theme-toggle {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        #theme-toggle:hover {
-            transform: rotate(15deg);
-        }
-
-        /* Hero / Intro opcional visual */
-        .intro {
-            text-align: center;
-            padding: 60px 20px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .intro h2 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-            font-family: var(--font-display);
-            letter-spacing: 1px;
-        }
-
-        .intro p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        main {
-            padding: 20px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        section {
-            margin-bottom: 80px;
-            scroll-margin-top: 100px;
-            /* Para que el sticky header no tape el título */
-        }
-
-        section h2 {
-            font-size: 2rem;
-            font-weight: 500;
-            font-family: var(--font-display);
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        section h2::after {
-            content: '';
-            flex-grow: 1;
-            height: 2px;
-            background: linear-gradient(to right, var(--secondary-accent), transparent);
-            border-radius: 2px;
-        }
-
-        .galeria {
-            display: grid;
-            /* Grid totalmente responsivo */
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 30px;
-        }
-
-        /* Estilo de Tarjetas */
-        .galeria-item {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: #f6f8fa;
+            color: #24292f;
             display: flex;
             flex-direction: column;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            transform: translateY(0);
-        }
-
-        .galeria-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .galeria-item .image-link {
-            display: block;
-            overflow: hidden;
-            position: relative;
-            padding-top: 140%;
-            /* Aspecto de póster de cine */
-        }
-
-        .galeria-item img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .galeria-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Overlay de Transición */
-        .theme-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            align-items: center;
+            justify-content: center;
             height: 100vh;
-            background-color: var(--bg-body);
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .theme-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .overlay-content {
-            text-align: center;
-        }
-
-        .overlay-content img {
-            width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .overlay-content h2 {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: var(--text-main);
             margin: 0;
-        }
-
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 20%, rgba(0, 0, 0, 0.9));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* Centrar verticalmente */
             padding: 20px;
-            box-sizing: border-box;
-            pointer-events: none;
         }
 
-        .galeria-item:hover .image-overlay {
-            opacity: 1;
-        }
-
-        .image-overlay p {
-            color: #fff;
+        .container {
             text-align: center;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            margin: 0;
-            font-weight: 500;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+            max-width: 600px;
+            width: 100%;
         }
 
-        .galeria-item:hover .image-overlay p {
-            transform: translateY(0);
+        .logo {
+            margin-bottom: 24px;
         }
 
-        .item-info {
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            z-index: 2;
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #cf222e;
         }
 
-        .item-info h3 {
-            margin: 0 0 0.5rem;
-            font-size: 1.3rem;
-            font-weight: 500;
-            font-family: var(--font-display);
-            letter-spacing: 0.5px;
-            color: var(--text-main);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #57606a;
         }
 
-        .rating-display {
-            font-size: 1.1rem;
-            margin-top: auto;
-            letter-spacing: 2px;
+        .warning-box {
+            background-color: #fff8c5;
+            border: 1px solid #d4a72c;
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 20px;
+            color: #bf8700;
+            font-weight: 600;
         }
 
-        .rating-display .star.filled {
-            color: var(--star-color);
-        }
-
-        .rating-display .star.empty {
-            color: var(--star-empty);
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            margin-top: 40px;
-        }
-
-        footer p a {
-            color: var(--primary-accent);
+        .action-button {
+            display: inline-block;
+            background-color: #2da44e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
+            margin-top: 20px;
         }
 
-        footer p a:hover {
-            color: var(--text-main);
-            text-decoration: underline;
-        }
-
-        /* Animación de entrada */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .galeria-item {
-            animation: fadeIn 0.6s ease backwards;
-        }
-
-        /* Retraso escalonado para la animación */
-        .galeria-item:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .galeria-item:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .galeria-item:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .galeria-item:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-
-
-
-        /* Media Queries para Responsividad Móvil */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 15px;
-            }
-
-            nav {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            nav ul {
-                gap: 15px;
-                font-size: 0.9rem;
-            }
-
-            section h2 {
-                font-size: 1.5rem;
-            }
-
-            .intro h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .galeria {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                /* Tarjetas más pequeñas en móvil */
-                gap: 15px;
-            }
-
-            .item-info {
-                padding: 0.8rem;
-            }
-
-            .item-info h3 {
-                font-size: 1rem;
-            }
-
-            .rating-display {
-                font-size: 0.9rem;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-            }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6e7781;
         }
     </style>
 </head>
 
 <body>
+    <div class="container">
+        <div class="logo">
+            <!-- GitHub Logo SVG -->
+            <svg height="48" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="48" data-view-component="true"
+                class="octicon octicon-mark-github">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+        </div>
+        <h1>Servicio Suspendido</h1>
+        <p>
+            Esta página web ha sido deshabilitada de conformidad con nuestras nuevas políticas de mantenimiento de
+            servicio.
+            El colaborador <strong>Satory</strong> ha perdido su estado de verificación con GitHub, lo que impide la
+            continuidad del alojamiento de este sitio.
+        </p>
+        <div class="warning-box">
+            ⚠ URGENTE: Acción Requerida
+        </div>
+        <p style="margin-top: 15px;">
+            El propietario debe comunicarse de inmediato con la entidad responsable o <strong>renovar los contratos de
+                servicio</strong> existentes.
+        </p>
+        <p>
+            <strong>Advertencia:</strong> Si no se regulariza la situación, GitHub eliminará permanentemente esta página
+            y todos sus datos asociados el <strong>sábado 7 de julio</strong>.
+        </p>
 
-    <!-- Overlay de Transición -->
-    <div id="theme-overlay" class="theme-overlay">
-        <div class="overlay-content">
-            <!-- Gif de perrito corriendo -->
-            <img src="media/ca6306b31bc56423fd716406deed3b3d.gif" alt="Cargando...">
-            <h2 id="overlay-text">Cambiando tema...</h2>
+        <div class="footer">
+            &copy; 2026 GitHub, Inc. • Terms • Privacy • Status
         </div>
     </div>
-
-    <header>
-        <h1>Galería de Medios</h1>
-        <nav>
-            <ul>
-                <li><a href="#animes">Animes</a></li>
-                <li><a href="#peliculas">Películas</a></li>
-                <li><a href="#doramas">Doramas</a></li>
-            </ul>
-            <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-        </nav>
-    </header>
-
-    <div class="intro">
-        <h2>Disfruta del mejor contenido</h2>
-        <p>Explora nuestra colección curada de animes, películas y doramas mejor valorados.</p>
-    </div>
-
-    <main>
-        <section id="animes">
-            <h2>Animes</h2>
-            <div class="galeria">
-                <!-- Para cambiar la puntuación, edita las clases 'filled' o 'empty' -->
-                <div class="galeria-item">
-                    <a href="https://ww3.animeonline.ninja/online/peach-girl/" target="_blank" class="image-link">
-                        <img src="media/2e20683602949e6bcffafa6a44e5e832.jpg" alt="Peach Girl">
-                        <div class="image-overlay">
-                            <p>Momo, una chica bronceada y de pelo claro, lucha contra los prejuicios y enredos amorosos
-                                en la escuela.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Peach Girl</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="galeria-item">
-                    <a href="https://ww3.animeonline.ninja/online/darling-in-the-franxx-121024/" target="_blank"
-                        class="image-link">
-                        <img src="media/DARLING_in_the_FRANXX_.webp" alt="Darling in the Franxx">
-                        <div class="image-overlay">
-                            <p>En un futuro distópico, jóvenes pilotos luchan en robots gigantes mientras descubren el
-                                amor y la humanidad.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Darling in the Franxx</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="galeria-item">
-                    <a href="" target="_blank"
-                        class="image-link">
-                        <img src="" alt="Darling in the Franxx">
-                        <div class="image-overlay">
-                            <p>En un futuro distópico, jóvenes pilotos luchan en robots gigantes mientras descubren el
-                                amor y la humanidad.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Darling in the Franxx temp 2</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="galeria-item">
-                    <a href="https://ww3.animeonline.ninja/online/kobayashi-san-chi-no-maid-dragon-2/" target="_blank"
-                        class="image-link">
-                        <img src="media/Kobayashi-san_Chi_no_Maid_Dragon_29.webp" alt="Kobayashi-san">
-                        <div class="image-overlay">
-                            <p>Una oficinista solitaria termina viviendo con una dragona que se convierte en su
-                                sirvienta.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Kobayashi-san's Dragon Maid</h3>
-                        <div class="rating-display">
-                            <span class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="peliculas">
-            <h2>Películas</h2>
-            <div class="galeria">
-                <div class="galeria-item">
-                    <a href="https://ww3.animeonline.ninja/pelicula/koe-no-katachi-070125/" target="_blank"
-                        class="image-link">
-                        <img src="media/a-silent-voice.jpg" alt="A Silent Voice">
-                        <div class="image-overlay">
-                            <p>Un ex acosador busca la redención al reconectarse con la chica sorda a la que intimidó en
-                                la infancia.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>A Silent Voice</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="galeria-item">
-                    <a href="https://ww3.animeonline.ninja/pelicula/kimi-no-na-wa-your-name-091324/" target="_blank"
-                        class="image-link">
-                        <img src="media/MV5BMTIyNzFjNzItZmQ1MC00NzhjLThmMzYtZjRhN2Y3MmM2OGQyXkEyXkFqcGc@._V1_.jpg"
-                            alt="Your Name">
-                        <div class="image-overlay">
-                            <p>Dos adolescentes intercambian cuerpos misteriosamente y buscan encontrarse a pesar del
-                                tiempo y el espacio.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Your Name</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="galeria-item">
-                    <a href="https://ww3.animeonline.ninja/pelicula/tenki-no-ko-weathering-with-you-4/" target="_blank"
-                        class="image-link">
-                        <img src="media/MV5BN2Q3Y2VhMGQtODRlZS00MzI0LThhYTAtMDE5ZTQwMjQ5NTQ2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-                            alt="Weathering with You">
-                        <div class="image-overlay">
-                            <p>Un chico huido conoce a una chica que puede controlar el clima, cambiando sus destinos
-                                para siempre.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Weathering with You</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="doramas">
-            <h2>Doramas</h2>
-            <div class="galeria">
-                <div class="galeria-item">
-                    <a href="https://pandrama.com/episodio/me-llamo-kim-sam-soon-mi-adorable-sam-soon-lat-capitulo-1/op-1/"
-                        target="_blank" class="image-link">
-                        <img src="media/pcCmzOSn2vfbo6gmGc4n5X4KMTj.jpg" alt="Mi Adorable Sam Soon">
-                        <div class="image-overlay">
-                            <p>Una pastelera talentosa pero insegura encuentra el amor en un joven empresario arrogante.
-                            </p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Mi Adorable Sam Soon</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star empty">★</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="galeria-item">
-                    <a href="https://doramashd.com/766/Pan-Amor-y-Sueos-Capitulo-1/" target="_blank" class="image-link">
-                        <img src="media/unnamed.jpg" alt="Pan, Amor y Sueños">
-                        <div class="image-overlay">
-                            <p>Kim Tak Goo lucha contra viento y marea para convertirse en el mejor panadero de Corea.
-                            </p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Pan, Amor y Sueños</h3>
-                        <div class="rating-display">
-                            <span class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="galeria-item">
-                    <a href="https://doramashd.com/Cunning-Single-Lady/295/" target="_blank" class="image-link">
-                        <img src="media/cuning.jpg" alt="Cunning Single Lady">
-                        <div class="image-overlay">
-                            <p>Una mujer divorciada intenta reconquistar a su exmarido después de que este se vuelve un
-                                magnate exitoso.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Cunning Single Lady</h3>
-                        <div class="rating-display">
-                            <span class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="galeria-item">
-                    <a href="https://doramashd.com/Cunning-Single-Lady/295/" target="_blank" class="image-link">
-                        <img src="media/el-genio-y-los-desos-netflix-jpg..webp" alt="Cunning Single Lady">
-                        <div class="image-overlay">
-                            <p>Un genio mágico concede deseos que cambian el destino de quienes lo encuentran, con giros
-                                inesperados.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>EL GENIO Y LOS DESEOS</h3>
-                        <div class="rating-display">
-                            <span class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span><span class="star empty">★</span><span
-                                class="star empty">★</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="galeria-item">
-                    <a href="https://pandrama.io/doramas/start-up" target="_blank" class="image-link">
-                        <img src="media/hq55ekoWj3zHfBM8RoyxYcw64l3.webp" alt="Start-Up">
-                        <div class="image-overlay">
-                            <p>Jóvenes emprendedores luchan por convertir sus sueños virtuales en realidad en el mundo
-                                de las startups.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Start-Up</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="galeria-item">
-                    <a href="https://pandrama.com/episodio/goblin-audio-latino-capitulo-2/op-3/" target="_blank"
-                        class="image-link">
-                        <img src="media/goblin-el-solitario-ser-inmortal.jpg" alt="Goblin">
-                        <div class="image-overlay">
-                            <p>Un ser inmortal busca a su novia destinada para poner fin a su maldita vida eterna.</p>
-                        </div>
-                    </a>
-                    <div class="item-info">
-                        <h3>Goblin</h3>
-                        <div class="rating-display">
-                            <span class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span><span class="star filled">★</span><span
-                                class="star filled">★</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 GALERY. Creado con ❤️ por <a href="https://satory371.github.io/Satory_web/"
-                target="_blank">SATORY</a></p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            const overlay = document.getElementById('theme-overlay');
-            const overlayText = document.getElementById('overlay-text');
-
-            // Función para aplicar el tema guardado
-            const applyTheme = (theme) => {
-                if (theme === 'dark') {
-                    body.classList.add('dark-mode');
-                    themeToggle.textContent = '☀️';
-                } else {
-                    body.classList.remove('dark-mode');
-                    themeToggle.textContent = '🌙';
-                }
-            };
-
-            // Cargar el tema guardado en localStorage
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-            } else {
-                // Auto-detectar preferencia de sistema
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    applyTheme('dark');
-                }
-            }
-
-            // Event listener para el botón de cambio de tema
-            themeToggle.addEventListener('click', () => {
-                const currentIsDark = body.classList.contains('dark-mode');
-
-                // Determinar el próximo estado
-                const nextIsDark = !currentIsDark;
-
-                // Configurar el estilo del overlay según el TEMA AL QUE VAMOS
-                if (nextIsDark) {
-                    overlayText.textContent = 'Cambiando a modo oscuro...';
-                    overlay.style.backgroundColor = '#1a1b26'; // Color oscuro
-                    overlayText.style.color = '#e2e8f0'; // Texto claro
-                } else {
-                    overlayText.textContent = 'Cambiando a modo claro...';
-                    overlay.style.backgroundColor = '#f4f7fc'; // Color claro
-                    overlayText.style.color = '#2c3e50'; // Texto oscuro
-                }
-
-                // Mostrar overlay
-                overlay.classList.add('active');
-
-                // Esperar 2 segundos
-                setTimeout(() => {
-                    const isDarkMode = body.classList.toggle('dark-mode');
-
-                    if (isDarkMode) {
-                        localStorage.setItem('theme', 'dark');
-                        themeToggle.textContent = '☀️';
-                    } else {
-                        localStorage.setItem('theme', 'light');
-                        themeToggle.textContent = '🌙';
-                    }
-
-                    // Resetear estilos inline del overlay para que no interfieran despues
-                    setTimeout(() => {
-                        overlay.style.backgroundColor = '';
-                        overlayText.style.color = '';
-                    }, 300);
-
-                    // Ocultar overlay
-                    overlay.classList.remove('active');
-                }, 2000); // 2000ms = 2 segundos
-            });
-        });
-    </script>
 </body>
 
 </html>

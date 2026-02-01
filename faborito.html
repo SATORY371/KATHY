@@ -1,317 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi amiga veterinaria</title>
+    <title>Sitio Suspendido - GitHub Pages</title>
     <style>
-        /* Paleta de colores más suave y amigable */
-        :root {
-            --color-principal: #4a235a; /* Púrpura oscuro y elegante */
-            --color-secundario: #f3e5f5; /* Lavanda claro */
-            --color-acentos: #ffc107; /* Amarillo cálido */
-            --color-texto: #2c2c2c; /* Gris oscuro para mayor contraste */
-            --color-fondo-claro: #f8f8f8;
-            --color-borde: #d1c4e9;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--color-texto);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Video de fondo */
-        #video-fondo {
-            position: fixed;
-            top: 0;
-            left: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -1;
-            background-size: cover;
-            filter: brightness(0.6) blur(2px);
-        }
-
-        /* Pantalla de bloqueo - ahora con un mensaje más personal */
-        #bloqueo-pantalla {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.4);
-            color: var(--color-principal);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            z-index: 1000;
-            transition: opacity 1s ease;
-        }
-
-        #bloqueo-pantalla.oculto {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .mensaje-bloqueo {
-            font-size: clamp(1.5em, 5vw, 2.2em); /* Ajuste de fuente responsivo */
-            font-weight: bold;
-            padding: 25px 50px;
-            background-color: var(--color-secundario);
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            border: 3px solid var(--color-borde);
-            transform: translateY(0);
-            animation: bounceIn 1s ease-out forwards;
-        }
-
-        /* Animación para el mensaje inicial */
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            60% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
-        /* Contenido de la página */
-        #contenido {
-            display: none;
-            padding: 30px;
-            max-width: 900px;
-            margin: 40px auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .intro-message {
-            background-color: var(--color-secundario);
-            border: 2px solid var(--color-borde);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            font-size: 1.3em;
-            font-weight: bold;
-            text-align: center;
-            color: var(--color-principal);
-        }
-
-        h1, h2, h3 {
-            text-align: center;
-            color: var(--color-principal);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
-        
-        /* Contenedor principal de videos */
-        .video-grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .video-section {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: #f6f8fa;
+            color: #24292f;
             display: flex;
             flex-direction: column;
-            background-color: var(--color-fondo-claro);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
-            position: relative;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
 
-        /* Contenedor de video con un borde más suave */
-        .video-container {
-            position: relative;
+        .container {
+            text-align: center;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+            max-width: 600px;
             width: 100%;
-            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        
-        /* GIF del gato, con un tamaño ajustado */
-        .gato-gif {
-            position: absolute;
-            bottom: 5px;
-            left: 5px; /* Cambiado de 'right: 5px;' a 'left: 5px;' */
-            width: 50px; 
-            height: auto;
-            z-index: 1;
-            border-radius: 5px;
+        .logo {
+            margin-bottom: 24px;
         }
 
-        ul {
-            text-align: left;
-            padding-left: 20px;
-            list-style-type: '🐾 ';
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #cf222e;
         }
 
-        li {
-            margin-bottom: 8px;
-        }
-        
-        /* Animación del perrito */
-        .dog-gif {
-            position: fixed;
-            width: 100px;
-            z-index: 100;
-            animation: walk-bidirectional 30s linear infinite;
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #57606a;
         }
 
-        @keyframes walk-bidirectional {
-            0% { transform: translateX(-100%); bottom: 20px; top: unset; }
-            49% { transform: translateX(120vw); bottom: 20px; top: unset; }
-            50% { transform: translateX(120vw) scaleX(-1); bottom: unset; top: 20px; }
-            51% { transform: translateX(120vw) scaleX(-1); bottom: unset; top: 20px; }
-            99% { transform: translateX(-100%) scaleX(-1); bottom: unset; top: 20px; }
-            100% { transform: translateX(-100%); bottom: 20px; top: unset; }
+        .warning-box {
+            background-color: #fff8c5;
+            border: 1px solid #d4a72c;
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 20px;
+            color: #bf8700;
+            font-weight: 600;
         }
 
-        /* Asegura que las secciones no-video también sean responsivas */
-        .game-section {
-            grid-column: 1 / -1; /* Ocupa el ancho completo */
+        .action-button {
+            display: inline-block;
+            background-color: #2da44e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
         }
 
-        /* Media queries para responsividad */
-        @media (max-width: 768px) {
-            #contenido {
-                padding: 10px;
-                margin: 10px auto;
-            }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6e7781;
         }
     </style>
 </head>
+
 <body>
+    <div class="container">
+        <div class="logo">
+            <!-- GitHub Logo SVG -->
+            <svg height="48" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="48" data-view-component="true"
+                class="octicon octicon-mark-github">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
+        </div>
+        <h1>Servicio Suspendido</h1>
+        <p>
+            Esta página web ha sido deshabilitada de conformidad con nuestras nuevas políticas de mantenimiento de
+            servicio.
+            El colaborador <strong>Satory</strong> ha perdido su estado de verificación con GitHub, lo que impide la
+            continuidad del alojamiento de este sitio.
+        </p>
+        <div class="warning-box">
+            ⚠ URGENTE: Acción Requerida
+        </div>
+        <p style="margin-top: 15px;">
+            El propietario debe comunicarse de inmediato con la entidad responsable o <strong>renovar los contratos de
+                servicio</strong> existentes.
+        </p>
+        <p>
+            <strong>Advertencia:</strong> Si no se regulariza la situación, GitHub eliminará permanentemente esta página
+            y todos sus datos asociados el <strong>sábado 7 de julio</strong>.
+        </p>
 
-    <img src="media/ca6306b31bc56423fd716406deed3b3d.gif" alt="Perrito caminando" class="dog-gif">
-    
-    <video autoplay muted loop id="video-fondo">
-        <source src="media/angela.mp4" type="video/mp4">
-        Tu navegador no soporta el video de fondo.
-    </video>
-
-    <div id="bloqueo-pantalla">
-        <div class="mensaje-bloqueo">
-            <p>🐾 ¡Un regalo digital para la mejor veterinaria del mundo! 🐾</p>
+        <div class="footer">
+            &copy; 2026 GitHub, Inc. • Terms • Privacy • Status
         </div>
     </div>
-
-    <div id="contenido">
-        <header>
-            <h1>Mi juego favorito: Mobile Legends</h1>
-            <div class="intro-message">
-                <p>¡Te quiero mostrar el juego que nos encanta! En este juego hemos compartido momentos épicos. 🥰</p>
-            </div>
-        </header>
-
-        <main class="video-grid-container">
-            <section class="video-section">
-                <h2>El trailer de tu personaje favorito</h2>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/kXe1J8jRCSw" frameborder="0" allowfullscreen></iframe>
-                    <img src="media/gifs-gatos.gif" alt="gato caida" class="gato-gif">
-                </div>
-            </section>
-
-            <section class="video-section">
-                <h2>Batalla epica</h2>
-                <div class="video-container">
-                    <iframe src="https://mivalyo.com/embed/o27g4hvucg0i" 
-                            frameborder="0" 
-                            marginwidth="0" 
-                            marginheight="0" 
-                            scrolling="no" 
-                            allowfullscreen>
-                    </iframe>
-                    <img src="media/gifs-gatos.gif" alt="gato caida" class="gato-gif">
-                </div>
-            </section>
-
-            <section class="video-section">
-                <h2>Momentos épicos de Angela</h2>
-                <div class="video-container">
-                    <iframe src="https://mivalyo.com/embed/cjz5kst58g52" 
-                            frameborder="0" 
-                            marginwidth="0" 
-                            marginheight="0" 
-                            scrolling="no" 
-                            allowfullscreen>
-                    </iframe>
-                    <img src="media/gifs-gatos.gif" alt="gato caida" class="gato-gif">
-                </div>
-            </section>
-            
-            <section class="video-section">
-                <h2>¡Así se gana!</h2>
-                <div class="video-container">
-                    <iframe src="https://mivalyo.com/embed/n1sbr28ghl1p" 
-                            frameborder="0" 
-                            marginwidth="0" 
-                            marginheight="0" 
-                            scrolling="no" 
-                            allowfullscreen>
-                    </iframe>
-                    <img src="media/gifs-gatos.gif" alt="gato caida" class="gato-gif">
-                </div>
-            </section>
-            
-            <section class="game-section">
-                <h2>Un universo lleno de animales increíbles</h2>
-                <p>En Mobile Legends hay héroes que son como los animales que te encantan. Hay un oso adorable, un leopardo ágil y hasta un panda que usa un bambú gigante. ¡Es el juego perfecto para alguien que ama a las mascotas en la vida real y también en el mundo virtual!</p>
-                <p><b>Mis héroes favoritos con forma de animal:</b></p>
-                <ul>
-                    <li>🐾 Akai 🐾: Un oso panda tierno pero poderoso, que es de mis favoritos.</li>
-                    <li>🐾 Masha 🐾: Una heroína con el espíritu de un oso que pelea sin rendirse.</li>
-                    <li>🐾 Sun 🐾: Un rey mono que puede crear clones para ayudarte a ganar.</li>
-                    <li>🐾 Wanwan 🐾: ¡Mi heroína favorita! Es como una gatita ágil que salta y lanza dardos para ganar.</li>
-                </ul>
-            </section>
-        </main>
-        
-       <footer>
-    <footer>
-    <div class="intro-message">
-        <p>
-            Espero que te guste el sitio que te hice con todo mi cariño. Si quieres jugar, ¡solo dime y nos vemos en el campo de batalla! ❤️
-            <a href="mobilelegends://" style="color: gold; text-decoration:none;">GO O NO GO</a>
-        </p>
-    </div>
-</footer>
-</footer>
-    </div>
-
-    <script>
-        const bloqueoPantalla = document.getElementById('bloqueo-pantalla');
-        const contenidoPagina = document.getElementById('contenido');
-        const tiempoEspera = 10000;
-
-        function mostrarContenido() {
-            bloqueoPantalla.classList.add('oculto');
-            contenidoPagina.style.display = 'block';
-        }
-
-        setTimeout(mostrarContenido, tiempoEspera);
-    </script>
-
 </body>
+
 </html>

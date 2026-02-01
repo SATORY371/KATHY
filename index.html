@@ -4,612 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FELIZ CUMPLEAÑOS KATHY</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Importing Cinzel for Genshin-like aesthetic and Crimson Text for readability -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="estilo.css">
+    <title>Sitio Suspendido - GitHub Pages</title>
     <style>
-        :root {
-            --font-title: 'Cinzel', serif;
-            /* Genshin-like fantasy font */
-            --font-body: 'Crimson Text', serif;
-            --color-gold: #D4AF37;
-            --color-red: #C41E3A;
-            --color-dark-green: #0a2f15;
-            --color-cream: #f9f4e0;
-        }
-
         body {
-            /* Christmas Background overriding estilo.css default */
-            background: url('media/—Slidesdocs—deseos navideños vibrantes dulces de_a02258458f.jpg') no-repeat center center fixed !important;
-            background-size: cover !important;
-            font-family: var(--font-body);
-        }
-
-        /* Overlay to improve text readability on the Christmas background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            /* Slight darkening for readability */
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Video background utility - Preserving used class */
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        /* Apply Christmas Typography */
-        h1,
-        h2,
-        .title,
-        .link-title {
-            font-family: var(--font-title) !important;
-            color: var(--color-red) !important;
-            text-shadow: 2px 2px 0px rgba(212, 175, 55, 0.6) !important;
-            /* Gold shadow */
-        }
-
-        /* Customize slides to look more festive without changing size */
-        .slide-content,
-        .personal-message {
-            border: 2px solid var(--color-gold);
-            background: rgba(255, 255, 255, 0.95);
-            /* Ensure readability */
-        }
-
-        /* Ensure content starts below the Christmas lights */
-        .horizontal-scroll-container .item {
-            padding-top: 160px !important;
-            /* Clear the 150px lights */
-        }
-
-        /* Customizing specific elements */
-        .date {
-            color: var(--color-dark-green) !important;
-            font-weight: bold;
-        }
-
-        /* Snow Animation Effect (Simple CSS) - Does not affect layout */
-        @keyframes snow {
-            0% {
-                transform: translateY(-10vh) translateX(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(100vh) translateX(20px);
-                opacity: 0.3;
-            }
-        }
-
-        .snowflake {
-            position: fixed;
-            color: #fff;
-            font-size: 1.5rem;
-            user-select: none;
-            z-index: 9999;
-            pointer-events: none;
-            animation: snow 10s linear infinite;
-            top: -10vh;
-        }
-
-        .snowflake:nth-child(2) {
-            left: 20%;
-            animation-duration: 12s;
-            animation-delay: 1s;
-        }
-
-        .snowflake:nth-child(3) {
-            left: 40%;
-            animation-duration: 8s;
-            animation-delay: 2s;
-            font-size: 1rem;
-        }
-
-        .snowflake:nth-child(4) {
-            left: 60%;
-            animation-duration: 15s;
-            animation-delay: 0s;
-        }
-
-        .snowflake:nth-child(5) {
-            left: 80%;
-            animation-duration: 11s;
-            animation-delay: 4s;
-            font-size: 2rem;
-        }
-
-
-        /* Christmas Lights Configuration */
-        /* Robust Christmas Lights Configuration */
-        .christmas-light-container {
-            position: fixed !important;
-            top: -20px;
-            /* Slight height adjustment */
-            left: 0 !important;
-            width: 100% !important;
-            height: 150px !important;
-            display: flex !important;
-            justify-content: space-between !important;
-            z-index: 2147483647 !important;
-            pointer-events: none;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        .light-swag {
-            position: relative;
-            width: 25%;
-            height: 100px;
-            /* Curved wire effect using border */
-            border-bottom: 3px solid #111;
-            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: #f6f8fa;
+            color: #24292f;
             display: flex;
-            justify-content: center;
-        }
-
-        .swag-lights {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            pointer-events: none;
-        }
-
-        .swag-lights li {
-            position: relative;
-            width: 18px;
-            height: 35px;
-            border-radius: 50%;
-            background: #fff;
-            animation-name: flash;
-            margin: 0 5px;
-            /* Socket */
-        }
-
-        .swag-lights li:before {
-            content: "";
-            position: absolute;
-            background: #222;
-            width: 14px;
-            height: 10px;
-            border-radius: 3px;
-            top: -6px;
-            left: 2px;
-        }
-
-        /* Curve positioning for 10 lights per swag */
-        .swag-lights li:nth-child(1) {
-            transform: translateY(12px) rotate(15deg);
-        }
-
-        .swag-lights li:nth-child(2) {
-            transform: translateY(30px) rotate(10deg);
-        }
-
-        .swag-lights li:nth-child(3) {
-            transform: translateY(55px) rotate(5deg);
-        }
-
-        .swag-lights li:nth-child(4) {
-            transform: translateY(75px) rotate(2deg);
-        }
-
-        .swag-lights li:nth-child(5) {
-            transform: translateY(85px) rotate(0deg);
-        }
-
-        .swag-lights li:nth-child(6) {
-            transform: translateY(85px) rotate(0deg);
-        }
-
-        .swag-lights li:nth-child(7) {
-            transform: translateY(75px) rotate(-2deg);
-        }
-
-        .swag-lights li:nth-child(8) {
-            transform: translateY(55px) rotate(-5deg);
-        }
-
-        .swag-lights li:nth-child(9) {
-            transform: translateY(30px) rotate(-10deg);
-        }
-
-        .swag-lights li:nth-child(10) {
-            transform: translateY(12px) rotate(-15deg);
-        }
-
-
-        /* Color Patterns: Purple, Yellow, Blue, Red */
-        .swag-lights li:nth-child(4n+1) {
-            background: rgba(191, 0, 255, 1);
-            /* Purple */
-            box-shadow: 0px 5px 24px 3px rgba(191, 0, 255, 0.8);
-            animation-duration: 2s;
-        }
-
-        .swag-lights li:nth-child(4n+2) {
-            background: rgba(255, 234, 0, 1);
-            /* Yellow */
-            box-shadow: 0px 5px 24px 3px rgba(255, 234, 0, 0.8);
-            animation-duration: 3s;
-            animation-delay: 1s;
-        }
-
-        .swag-lights li:nth-child(4n+3) {
-            background: rgba(0, 191, 255, 1);
-            /* Deep Sky Blue */
-            box-shadow: 0px 5px 24px 3px rgba(0, 191, 255, 0.8);
-            animation-duration: 2.5s;
-            animation-delay: 0.5s;
-        }
-
-        .swag-lights li:nth-child(4n+4) {
-            background: rgba(255, 0, 60, 1);
-            /* Red */
-            box-shadow: 0px 5px 24px 3px rgba(255, 0, 60, 0.8);
-            animation-duration: 1.5s;
-            animation-delay: 1.5s;
-        }
-
-        /* Generic Flash Animation */
-        @keyframes flash {
-
-            0%,
-            100% {
-                opacity: 1;
-                filter: brightness(1.2);
-            }
-
-            50% {
-                opacity: 0.6;
-                filter: brightness(0.8);
-            }
-        }
-
-        /* Music Control Button */
-        #music-control {
-            position: fixed;
-            top: 150px;
-            /* Moved down to avoid Christmas lights overlap */
-            right: 20px;
-            /* High enough to be over snow but maybe under lock screen if needed, though lock screen is 9999 */
-            z-index: 2147483647;
-            /* Ensure it's on top along with lights */
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--color-gold);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
 
-        #music-control:hover {
-            transform: scale(1.1);
-            background: rgba(212, 175, 55, 0.3);
+        .container {
+            text-align: center;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+            max-width: 600px;
+            width: 100%;
         }
 
-        #music-control span {
+        .logo {
+            margin-bottom: 24px;
+        }
+
+        h1 {
             font-size: 24px;
-            color: var(--color-gold);
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #cf222e;
         }
 
-        /* --- Responsive Styles for Christmas Lights & Music Control --- */
-        @media (max-width: 768px) {
-            .christmas-light-container {
-                height: 100px !important;
-            }
-
-            .light-swag {
-                height: 70px;
-                /* Reduced curve height */
-            }
-
-            .swag-lights li {
-                width: 12px;
-                height: 24px;
-                margin: 0 2px;
-            }
-
-            .swag-lights li:before {
-                width: 10px;
-                height: 8px;
-                top: -4px;
-                left: 1px;
-            }
-
-            #music-control {
-                top: 110px;
-                width: 40px;
-                height: 40px;
-            }
-
-            #music-control span {
-                font-size: 20px;
-            }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #57606a;
         }
 
-        @media (max-width: 480px) {
-            .christmas-light-container {
-                height: 80px !important;
-            }
+        .warning-box {
+            background-color: #fff8c5;
+            border: 1px solid #d4a72c;
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 20px;
+            color: #bf8700;
+            font-weight: 600;
+        }
 
-            .light-swag {
-                height: 60px;
-            }
+        .action-button {
+            display: inline-block;
+            background-color: #2da44e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+        }
 
-            .swag-lights li {
-                width: 10px;
-                height: 20px;
-                margin: 0 1px;
-            }
-
-            #music-control {
-                top: 90px;
-                width: 35px;
-                height: 35px;
-            }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6e7781;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Background Music -->
-    <audio id="bg-music" loop>
-        <source src="song/K´anas Wawakuna chaska ñawi niñucha subtitulado.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
-
-    <!-- Music Control Button -->
-    <div id="music-control" title="Silenciar / Activar Sonido">
-        <span>🔇</span>
-    </div>
-
-    <!-- Christmas Lights Container -->
-    <div class="christmas-light-container">
-        <!-- Swag 1 -->
-        <div class="light-swag">
-            <ul class="swag-lights">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+    <div class="container">
+        <div class="logo">
+            <!-- GitHub Logo SVG -->
+            <svg height="48" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="48" data-view-component="true"
+                class="octicon octicon-mark-github">
+                <path fill-rule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                </path>
+            </svg>
         </div>
-        <!-- Swag 2 -->
-        <div class="light-swag">
-            <ul class="swag-lights">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+        <h1>Servicio Suspendido</h1>
+        <p>
+            Esta página web ha sido deshabilitada de conformidad con nuestras nuevas políticas de mantenimiento de
+            servicio.
+            El colaborador <strong>Satory</strong> ha perdido su estado de verificación con GitHub, lo que impide la
+            continuidad del alojamiento de este sitio.
+        </p>
+        <div class="warning-box">
+            ⚠ URGENTE: Acción Requerida
         </div>
-        <!-- Swag 3 -->
-        <div class="light-swag">
-            <ul class="swag-lights">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-        <!-- Swag 4 -->
-        <div class="light-swag">
-            <ul class="swag-lights">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+        <p style="margin-top: 15px;">
+            El propietario debe comunicarse de inmediato con la entidad responsable o <strong>renovar los contratos de
+                servicio</strong> existentes.
+        </p>
+        <p>
+            <strong>Advertencia:</strong> Si no se regulariza la situación, GitHub eliminará permanentemente esta página
+            y todos sus datos asociados el <strong>sábado 7 de julio</strong>.
+        </p>
+
+        <div class="footer">
+            &copy; 2026 GitHub, Inc. • Terms • Privacy • Status
         </div>
     </div>
-
-    <!-- Slide 1: Lock Screen / Welcome MOVED OUTSIDE -->
-    <div class="item" id="lock-screen"
-        style="background-image: url('https://images.unsplash.com/photo-1544084944-15a3ad968a75?q=80&w=1974&auto=format&fit=crop'); background-size: cover; background-position: center;">
-        <div class="slide-content" style="background: transparent; box-shadow: none; border: none;">
-            <h2 class="title">¡Actualización Navideña!</h2>
-            <div class="poetic-text">
-                "En esta Navidad, recibes la actualización definitiva:<br>
-                Más de 1,000,000 líneas de código perfeccionado,<br>
-                Arquitectura robusta y 100% responsiva,<br>
-                Iluminación dinámica y atmósfera inmersiva,<br>
-                Corrección de errores que existian en la web,<br>
-                Más de un mes de ingeniería y diseño,<br>
-                Y un amor infinito compilado solo para ti."
-            </div>
-            <p class="subtitle" style="color: var(--color-gold);">Desbloqueando en:</p>
-            <div id="countdown">
-                <div><span id="days">00</span><span>Días</span></div>
-                <div><span id="hours">00</span><span>Horas</span></div>
-                <div><span id="minutes">00</span><span>Minutos</span></div>
-                <div><span id="seconds">00</span><span>Segundos</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="horizontal-scroll-container">
-
-        <!-- Slide 2: Intro Card -->
-        <div class="item"
-            style="background-image: url('https://images.unsplash.com/photo-1543589077-47d81606c1bf?q=80&w=1974&auto=format&fit=crop'); /* Christmas vibe image replacement */">
-            <div class="slide-content">
-                <div class="header">
-                    <div class="heart">♥</div>
-                    <div class="date"
-                        style="font-family: var(--font-title); color: var(--color-dark-green); font-weight: bold;">
-                    </div>
-                    <h1 class="title">Para vos KATHY</h1>
-                    <p class="subtitle">Bienvenida de nuevo a tu sitio web. Este mundo es solo para ti.</p>
-                    <div class="heart">♥</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 3: Song Link -->
-        <div class="item single-card-slide"
-            style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070&auto=format&fit=crop');">
-            <a href="sky.html" class="link-card" target="_blank">
-                <span class="link-icon">🎵</span>
-                <div class="link-title">Nuestra Canción</div>
-                <div class="link-description">La melodía que siempre me recuerda a ti, con cada nota un recuerdo.
-                    <strong>CLICK AQUI</strong>
-                </div>
-            </a>
-        </div>
-
-        <!-- Slide 4: Favorite Game -->
-        <div class="item single-card-slide"
-            style="background-image: url('media/granger-alluring-enigma-silvanna-alluring-mystique-mlbb-hd-wallpaper-uhdpaper.com-434@3@b.jpg');">
-            <a href="faborito.html" class="link-card" target="_blank">
-                <span class="link-icon">🎮</span>
-                <div class="link-title">JUEGO FAVORITO</div>
-                <div class="link-description">El mundo donde vives tus mejores aventuras.</div>
-            </a>
-        </div>
-
-        <!-- Slide 5: Moments -->
-        <div class="item" style="background-image: url('media/angela wall.jpg');">
-            <div class="slide-content">
-                <h2 class="title" style="font-size: 1.5rem;">Momentos épicos logrados gracias a ti</h2>
-                <a href="momentos.html"
-                    style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--color-red); color: white; text-decoration: none; border-radius: 5px; font-family: var(--font-title);">VER
-                    MOMENTOS</a>
-            </div>
-        </div>
-
-        <!-- Slide 6: Moves/Animes Link -->
-        <div class="item single-card-slide"
-            style="background-image: url('https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1974&auto=format&fit=crop');">
-            <a href="peliculas.html" class="link-card" target="_blank">
-                <span class="link-icon">🎬</span>
-                <div class="link-title">Cine & TV</div>
-                <div class="link-description">Doramas, animes y películas para disfrutar juntos.</div>
-            </a>
-        </div>
-
-        <!-- Slide 7: Message 1 -->
-        <div class="item" style="background-image: url('media/561ff14e93f0761a80080c91ca729508.gif');">
-            <div class="personal-message">
-                "Desde el momento en que te conocí, supe que mi vida nunca sería igual. Cada
-                día contigo es una aventura, un aprendizaje y una bendición. Gracias por
-                ser tú, por tu luz, tu risa y tu cariño incondicional."
-                <br><br>
-                <span
-                    style="font-size: 0.9em; display: block; margin-top: 20px; font-family: var(--font-title); color: var(--color-red);">Con
-                    todo mi amor, SATORY</span>
-            </div>
-        </div>
-
-        <!-- Slide 8: Wishlist -->
-        <div class="item"
-            style="background-image: url('media/—Slidesdocs—deseos navideños vibrantes dulces de_a02258458f.jpg');">
-            <div class="slide-content">
-                <h2 class="title">Lista de tus Deseos</h2>
-                <p class="subtitle">Sueños por cumplir juntos</p>
-                <ul style="list-style: none; padding: 0; margin-top: 20px; text-align: left;">
-                    <li
-                        style="border-bottom: 1px solid var(--color-gold); padding: 10px 0; display: flex; align-items: center;">
-                        <span style="font-size: 1.2em; margin-right: 10px;">✈️</span> Viajar a Corea
-                    </li>
-                    <li
-                        style="border-bottom: 1px solid var(--color-gold); padding: 10px 0; display: flex; align-items: center;">
-                        <span style="font-size: 1.2em; margin-right: 10px;">🍳</span> Cocinar Postres
-                    </li>
-                    <li
-                        style="border-bottom: 1px solid var(--color-gold); padding: 10px 0; display: flex; align-items: center;">
-                        <span style="font-size: 1.2em; margin-right: 10px;">✨</span> Observación de Estrellas
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 9: Gift -->
-        <div class="item single-card-slide" style="background-image: url('media/SORPRESA.jpg');">
-            <a href="regalo.html" class="link-card" target="_blank">
-                <span class="link-icon">🎁</span>
-                <div class="link-title">Un Pequeño Regalo</div>
-                <div class="link-description">Algo especial para ti, porque te lo mereces.</div>
-            </a>
-        </div>
-
-        <!-- Slide 10: Final Message & Video -->
-        <div class="item">
-            <video autoplay muted loop playsinline class="video-background">
-                <source src="media/wanwan-mobile-legends.1920x1080.mp4" type="video/mp4">
-                Tu navegador no soporta el video.
-            </video>
-            <div class="slide-content">
-                <div class="footer">
-                    <p style="font-size: 1.2rem;">Este es solo el comienzo de muchas sorpresas más...</p>
-                    <p style="margin-top: 15px; font-family: var(--font-title); color: var(--color-red);">Siempre estaré
-                        ahí para ti.</p>
-                    <div class="heart" style="margin-top: 20px;">♥</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="navigations">
-        <ul class="dots"></ul>
-    </div>
-
-    <script src="funciones.js"></script>
 </body>
 
 </html>
